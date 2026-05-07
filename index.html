@@ -1,0 +1,2062 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NeuroWorld - Belajar, Bermain, Berkembang 🧠✨</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script>
+tailwind.config = {
+  darkMode: 'class',
+  theme: {
+    extend: {
+      fontFamily: {
+        'nunito': ['Nunito', 'sans-serif'],
+        'orbitron': ['Orbitron', 'sans-serif'],
+      }
+    }
+  }
+}
+</script>
+<style>
+:root {
+  --neon-blue: #00d4ff;
+  --neon-purple: #a855f7;
+  --neon-cyan: #06ffd0;
+  --neon-mint: #4ade80;
+  --neon-pink: #f472b6;
+  --glass-bg: rgba(15, 23, 42, 0.6);
+  --glass-border: rgba(255,255,255,0.12);
+  --glow-blue: 0 0 20px rgba(0,212,255,0.5);
+  --glow-purple: 0 0 20px rgba(168,85,247,0.5);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Nunito', sans-serif;
+  background: #0a0e1a;
+  color: #e2e8f0;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #0a0e1a; }
+::-webkit-scrollbar-thumb { background: linear-gradient(var(--neon-blue), var(--neon-purple)); border-radius: 10px; }
+
+/* Glassmorphism */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+}
+.glass-strong {
+  background: rgba(15, 23, 42, 0.8);
+  backdrop-filter: blur(30px);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 20px;
+}
+
+/* Glowing Effects */
+.glow-blue { box-shadow: var(--glow-blue); }
+.glow-purple { box-shadow: var(--glow-purple); }
+.glow-cyan { box-shadow: 0 0 20px rgba(6,255,208,0.4); }
+.glow-text-blue { text-shadow: 0 0 10px rgba(0,212,255,0.8), 0 0 40px rgba(0,212,255,0.3); }
+.glow-text-purple { text-shadow: 0 0 10px rgba(168,85,247,0.8), 0 0 40px rgba(168,85,247,0.3); }
+
+/* Neon Button */
+.btn-neon {
+  position: relative;
+  padding: 12px 28px;
+  border: 2px solid var(--neon-blue);
+  border-radius: 12px;
+  background: rgba(0,212,255,0.1);
+  color: var(--neon-blue);
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+.btn-neon:hover {
+  background: rgba(0,212,255,0.25);
+  box-shadow: 0 0 30px rgba(0,212,255,0.4), inset 0 0 30px rgba(0,212,255,0.1);
+  transform: translateY(-2px);
+}
+.btn-neon.purple { border-color: var(--neon-purple); color: var(--neon-purple); background: rgba(168,85,247,0.1); }
+.btn-neon.purple:hover { background: rgba(168,85,247,0.25); box-shadow: 0 0 30px rgba(168,85,247,0.4); }
+.btn-neon.cyan { border-color: var(--neon-cyan); color: var(--neon-cyan); background: rgba(6,255,208,0.1); }
+.btn-neon.cyan:hover { background: rgba(6,255,208,0.25); box-shadow: 0 0 30px rgba(6,255,208,0.4); }
+.btn-neon.mint { border-color: var(--neon-mint); color: var(--neon-mint); background: rgba(74,222,128,0.1); }
+.btn-neon.mint:hover { background: rgba(74,222,128,0.25); box-shadow: 0 0 30px rgba(74,222,128,0.4); }
+.btn-neon.pink { border-color: var(--neon-pink); color: var(--neon-pink); background: rgba(244,114,182,0.1); }
+.btn-neon.pink:hover { background: rgba(244,114,182,0.25); box-shadow: 0 0 30px rgba(244,114,182,0.4); }
+.btn-neon.sm { padding: 8px 18px; font-size: 13px; border-radius: 10px; }
+
+/* Animations */
+@keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+@keyframes pulse-glow { 0%,100% { opacity: 0.6; } 50% { opacity: 1; } }
+@keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@keyframes slideUp { from { opacity:0; transform: translateY(30px); } to { opacity:1; transform: translateY(0); } }
+@keyframes slideIn { from { opacity:0; transform: translateX(-30px); } to { opacity:1; transform: translateX(0); } }
+@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+@keyframes scaleIn { from { opacity:0; transform: scale(0.8); } to { opacity:1; transform: scale(1); } }
+@keyframes bounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+@keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+@keyframes sparkle { 0%,100% { opacity: 0; transform: scale(0); } 50% { opacity: 1; transform: scale(1); } }
+@keyframes wave { 0%,100% { transform: translateY(0) rotate(0deg); } 25% { transform: translateY(-5px) rotate(5deg); } 75% { transform: translateY(5px) rotate(-5deg); } }
+
+.float { animation: float 3s ease-in-out infinite; }
+.float-slow { animation: float 5s ease-in-out infinite; }
+.float-delay { animation: float 4s ease-in-out 1s infinite; }
+.pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
+.slide-up { animation: slideUp 0.6s ease-out forwards; }
+.slide-in { animation: slideIn 0.6s ease-out forwards; }
+.fade-in { animation: fadeIn 0.5s ease-out forwards; }
+.scale-in { animation: scaleIn 0.4s ease-out forwards; }
+
+/* Page transitions */
+.page { display: none; min-height: 100vh; }
+.page.active { display: block; animation: fadeIn 0.4s ease-out; }
+
+/* Background particles */
+#bg-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+
+/* Nav */
+.nav-item { position: relative; padding: 8px 16px; border-radius: 10px; cursor: pointer; transition: all 0.3s; font-weight: 600; }
+.nav-item:hover, .nav-item.active { background: rgba(0,212,255,0.15); }
+.nav-item.active::after { content: ''; position: absolute; bottom: -4px; left: 50%; transform: translateX(-50%); width: 20px; height: 3px; background: var(--neon-blue); border-radius: 2px; }
+
+/* Progress bar */
+.progress-bar { height: 8px; background: rgba(255,255,255,0.1); border-radius: 4px; overflow: hidden; }
+.progress-fill { height: 100%; border-radius: 4px; transition: width 0.5s ease; background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple)); }
+
+/* Card hover */
+.card-hover { transition: all 0.3s ease; }
+.card-hover:hover { transform: translateY(-4px); box-shadow: 0 8px 30px rgba(0,212,255,0.2); }
+
+/* XP bar */
+.xp-bar { background: linear-gradient(90deg, #f59e0b, #ef4444, #a855f7, #00d4ff); background-size: 200% 100%; animation: shimmer 3s linear infinite; }
+
+/* Chat bubble */
+.chat-bubble { max-width: 80%; padding: 12px 16px; border-radius: 16px; font-size: 14px; line-height: 1.5; }
+.chat-bubble.user { background: rgba(0,212,255,0.15); border: 1px solid rgba(0,212,255,0.3); margin-left: auto; border-bottom-right-radius: 4px; }
+.chat-bubble.ai { background: rgba(168,85,247,0.15); border: 1px solid rgba(168,85,247,0.3); border-bottom-left-radius: 4px; }
+
+/* Sign language hand */
+.hand-display { width: 120px; height: 120px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 48px; font-weight: 900; }
+
+/* Story illustration */
+.story-scene { min-height: 300px; border-radius: 16px; position: relative; overflow: hidden; }
+
+/* Toast */
+.toast { position: fixed; top: 20px; right: 20px; z-index: 9999; padding: 14px 24px; border-radius: 12px; font-weight: 600; animation: slideIn 0.4s ease-out, fadeOut 0.4s 2.6s ease-out forwards; }
+@keyframes fadeOut { to { opacity: 0; transform: translateX(30px); } }
+
+/* Mini game cards */
+.memory-card { width: 70px; height: 70px; perspective: 600px; cursor: pointer; }
+.memory-card-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
+.memory-card.flipped .memory-card-inner { transform: rotateY(180deg); }
+.memory-card-front, .memory-card-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 28px; }
+.memory-card-front { background: linear-gradient(135deg, rgba(0,212,255,0.2), rgba(168,85,247,0.2)); border: 1px solid rgba(255,255,255,0.1); }
+.memory-card-back { background: linear-gradient(135deg, rgba(6,255,208,0.3), rgba(74,222,128,0.3)); border: 1px solid rgba(6,255,208,0.3); transform: rotateY(180deg); }
+
+/* Sudoku */
+.sudoku-cell { width: 40px; height: 40px; text-align: center; font-size: 18px; font-weight: 700; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #e2e8f0; outline: none; border-radius: 6px; transition: all 0.2s; }
+.sudoku-cell:focus { background: rgba(0,212,255,0.15); border-color: var(--neon-blue); }
+.sudoku-cell.fixed { color: var(--neon-cyan); }
+
+/* Mascot */
+.mascot-container { position: relative; width: 180px; height: 180px; }
+.mascot-body { width: 120px; height: 120px; background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple)); border-radius: 50% 50% 45% 45%; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); }
+.mascot-eye { width: 18px; height: 22px; background: white; border-radius: 50%; position: absolute; top: 35%; }
+.mascot-eye-left { left: 32%; }
+.mascot-eye-right { right: 32%; }
+.mascot-pupil { width: 10px; height: 10px; background: #1a1a2e; border-radius: 50%; position: absolute; bottom: 4px; left: 50%; transform: translateX(-50%); }
+.mascot-mouth { width: 30px; height: 15px; border-bottom: 3px solid white; border-radius: 0 0 20px 20px; position: absolute; bottom: 28%; left: 50%; transform: translateX(-50%); }
+.mascot-antenna { width: 4px; height: 25px; background: var(--neon-cyan); position: absolute; top: 5%; left: 50%; transform: translateX(-50%); border-radius: 2px; }
+.mascot-antenna::after { content: ''; width: 12px; height: 12px; background: var(--neon-cyan); border-radius: 50%; position: absolute; top: -8px; left: 50%; transform: translateX(-50%); box-shadow: 0 0 10px var(--neon-cyan); }
+
+/* World map */
+#world-map-canvas { border-radius: 16px; cursor: crosshair; }
+
+/* Quest marker */
+.quest-marker { position: absolute; width: 40px; height: 40px; animation: bounce 1.5s ease-in-out infinite; cursor: pointer; }
+
+/* Loading screen */
+#loading-screen {
+  position: fixed; top:0; left:0; width:100%; height:100%; z-index:99999;
+  background: #0a0e1a; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  transition: opacity 0.5s ease;
+}
+#loading-screen.hidden { opacity: 0; pointer-events: none; }
+.loading-spinner { width: 60px; height: 60px; border: 4px solid rgba(0,212,255,0.2); border-top-color: var(--neon-blue); border-radius: 50%; animation: rotate 1s linear infinite; }
+
+/* Streak flame */
+.streak-flame { display: inline-block; animation: wave 1s ease-in-out infinite; }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .btn-neon { padding: 10px 20px; font-size: 13px; }
+  .memory-card { width: 55px; height: 55px; }
+  .memory-card-back, .memory-card-front { font-size: 22px; }
+  .sudoku-cell { width: 34px; height: 34px; font-size: 15px; }
+}
+</style>
+</head>
+<body class="font-nunito">
+
+<!-- Loading Screen -->
+<div id="loading-screen">
+  <div class="loading-spinner mb-4"></div>
+  <h2 class="font-orbitron text-xl text-cyan-400 glow-text-blue">NeuroWorld</h2>
+  <p class="text-sm text-gray-400 mt-2">Memuat dunia belajar...</p>
+</div>
+
+<!-- Background Canvas -->
+<canvas id="bg-canvas"></canvas>
+
+<!-- Toast Container -->
+<div id="toast-container"></div>
+
+<!-- Top Navigation Bar -->
+<nav id="top-nav" class="fixed top-0 left-0 right-0 z-50 glass-strong" style="border-radius: 0; border-top: none; border-left: none; border-right: none;">
+  <div class="max-w-7xl mx-auto px-4 py-2 flex items-center justify-between">
+    <div class="flex items-center gap-3 cursor-pointer" onclick="navigateTo('home')">
+      <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-cyan-400 to-purple-500 flex items-center justify-center">
+        <span class="text-white text-lg">🧠</span>
+      </div>
+      <span class="font-orbitron font-bold text-lg bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent hidden sm:block">NeuroWorld</span>
+    </div>
+    <div class="flex items-center gap-1 overflow-x-auto" id="nav-items">
+      <div class="nav-item active text-cyan-400 text-sm" data-page="home" onclick="navigateTo('home')">
+        <i data-lucide="home" class="w-4 h-4 inline-block mr-1"></i><span class="hidden md:inline">Beranda</span>
+      </div>
+      <div class="nav-item text-gray-400 text-sm" data-page="world" onclick="navigateTo('world')">
+        <i data-lucide="map" class="w-4 h-4 inline-block mr-1"></i><span class="hidden md:inline">Dunia</span>
+      </div>
+      <div class="nav-item text-gray-400 text-sm" data-page="english" onclick="navigateTo('english')">
+        <i data-lucide="book-open" class="w-4 h-4 inline-block mr-1"></i><span class="hidden md:inline">Bahasa</span>
+      </div>
+      <div class="nav-item text-gray-400 text-sm" data-page="signlanguage" onclick="navigateTo('signlanguage')">
+        <i data-lucide="hand" class="w-4 h-4 inline-block mr-1"></i><span class="hidden md:inline">Isyarat</span>
+      </div>
+      <div class="nav-item text-gray-400 text-sm" data-page="story" onclick="navigateTo('story')">
+        <i data-lucide="book-heart" class="w-4 h-4 inline-block mr-1"></i><span class="hidden md:inline">Cerita</span>
+      </div>
+      <div class="nav-item text-gray-400 text-sm" data-page="minigames" onclick="navigateTo('minigames')">
+        <i data-lucide="gamepad-2" class="w-4 h-4 inline-block mr-1"></i><span class="hidden md:inline">Game</span>
+      </div>
+      <div class="nav-item text-gray-400 text-sm" data-page="ai" onclick="navigateTo('ai')">
+        <i data-lucide="bot" class="w-4 h-4 inline-block mr-1"></i><span class="hidden md:inline">AI</span>
+      </div>
+      <div class="nav-item text-gray-400 text-sm" data-page="dashboard" onclick="navigateTo('dashboard')">
+        <i data-lucide="bar-chart-3" class="w-4 h-4 inline-block mr-1"></i><span class="hidden md:inline">Analisis</span>
+      </div>
+    </div>
+    <div class="flex items-center gap-2">
+      <button id="music-btn" class="w-8 h-8 rounded-lg bg-white/5 hover:bg-white/10 flex items-center justify-center transition-all" onclick="toggleMusic()" title="Musik">
+        <i data-lucide="volume-2" class="w-4 h-4 text-gray-400" id="music-icon"></i>
+      </button>
+      <button id="theme-btn" class="w-8 h-8 rounded-lg bg-white/5 hover:bg-white/10 flex items-center justify-center transition-all" onclick="toggleTheme()" title="Tema">
+        <i data-lucide="moon" class="w-4 h-4 text-gray-400" id="theme-icon"></i>
+      </button>
+      <div class="flex items-center gap-2 ml-2 cursor-pointer" onclick="navigateTo('profile')">
+        <div class="w-8 h-8 rounded-full bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center text-sm font-bold" id="level-badge">1</div>
+      </div>
+    </div>
+  </div>
+  <!-- XP Bar -->
+  <div class="h-1 bg-gray-800/50">
+    <div class="h-full xp-bar transition-all duration-500" id="top-xp-bar" style="width: 0%"></div>
+  </div>
+</nav>
+
+<!-- ==================== HOME PAGE ==================== -->
+<div id="page-home" class="page active pt-16">
+  <!-- Hero Section -->
+  <section class="relative min-h-screen flex items-center justify-center overflow-hidden px-4">
+    <div class="absolute inset-0 bg-gradient-to-b from-cyan-500/5 via-purple-500/5 to-transparent"></div>
+    <div class="absolute top-20 left-10 w-32 h-32 bg-cyan-500/10 rounded-full blur-3xl float"></div>
+    <div class="absolute bottom-20 right-10 w-40 h-40 bg-purple-500/10 rounded-full blur-3xl float-delay"></div>
+    <div class="absolute top-40 right-20 w-24 h-24 bg-green-500/8 rounded-full blur-2xl float-slow"></div>
+
+    <div class="relative z-10 text-center max-w-4xl mx-auto">
+      <!-- Mascot -->
+      <div class="flex justify-center mb-8">
+        <div class="mascot-container float">
+          <div class="mascot-body">
+            <div class="mascot-antenna"></div>
+            <div class="mascot-eye mascot-eye-left"><div class="mascot-pupil"></div></div>
+            <div class="mascot-eye mascot-eye-right"><div class="mascot-pupil"></div></div>
+            <div class="mascot-mouth"></div>
+          </div>
+        </div>
+      </div>
+
+      <h1 class="font-orbitron text-5xl md:text-7xl font-black mb-4">
+        <span class="bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent glow-text-blue">NeuroWorld</span>
+      </h1>
+      <p class="text-xl md:text-2xl text-gray-300 mb-2 font-bold">Belajar, Bermain, Berkembang! ✨</p>
+      <p class="text-gray-400 mb-8 max-w-xl mx-auto">Dunia belajar interaktif untuk kamu yang luar biasa. Jelajahi, belajar, dan tumbuh bersama Neuro!</p>
+
+      <!-- Stats Row -->
+      <div class="flex flex-wrap justify-center gap-4 mb-8">
+        <div class="glass px-4 py-2 flex items-center gap-2">
+          <i data-lucide="flame" class="w-5 h-5 text-orange-400"></i>
+          <span class="font-bold text-orange-400" id="streak-count">0</span>
+          <span class="text-sm text-gray-400">Streak</span>
+        </div>
+        <div class="glass px-4 py-2 flex items-center gap-2">
+          <i data-lucide="star" class="w-5 h-5 text-yellow-400"></i>
+          <span class="font-bold text-yellow-400" id="total-xp">0</span>
+          <span class="text-sm text-gray-400">XP</span>
+        </div>
+        <div class="glass px-4 py-2 flex items-center gap-2">
+          <i data-lucide="trophy" class="w-5 h-5 text-purple-400"></i>
+          <span class="font-bold text-purple-400" id="level-display">Level 1</span>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="flex flex-wrap justify-center gap-3 mb-8">
+        <button class="btn-neon" onclick="navigateTo('english')">🎓 Mulai Belajar</button>
+        <button class="btn-neon purple" onclick="navigateTo('story')">📖 Dunia Cerita</button>
+        <button class="btn-neon cyan" onclick="navigateTo('minigames')">🎮 Mini Game</button>
+        <button class="btn-neon mint" onclick="navigateTo('world')">🗺️ Jelajah Map</button>
+        <button class="btn-neon pink" onclick="navigateTo('ai')">🤖 Chat AI</button>
+      </div>
+
+      <!-- Daily Quest Preview -->
+      <div class="glass p-6 max-w-md mx-auto text-left">
+        <div class="flex items-center gap-2 mb-3">
+          <i data-lucide="target" class="w-5 h-5 text-cyan-400"></i>
+          <span class="font-bold text-cyan-400">Misi Hari Ini</span>
+        </div>
+        <div class="space-y-2" id="daily-quests">
+          <div class="flex items-center gap-2 text-sm">
+            <div class="w-5 h-5 rounded border border-gray-600 flex items-center justify-center cursor-pointer quest-check" data-quest="0">
+            </div>
+            <span class="text-gray-300">Selesaikan 1 pelajaran bahasa Inggris</span>
+            <span class="ml-auto text-cyan-400 text-xs font-bold">+20 XP</span>
+          </div>
+          <div class="flex items-center gap-2 text-sm">
+            <div class="w-5 h-5 rounded border border-gray-600 flex items-center justify-center cursor-pointer quest-check" data-quest="1">
+            </div>
+            <span class="text-gray-300">Mainkan 1 mini game</span>
+            <span class="ml-auto text-purple-400 text-xs font-bold">+15 XP</span>
+          </div>
+          <div class="flex items-center gap-2 text-sm">
+            <div class="w-5 h-5 rounded border border-gray-600 flex items-center justify-center cursor-pointer quest-check" data-quest="2">
+            </div>
+            <span class="text-gray-300">Baca 1 cerita interaktif</span>
+            <span class="ml-auto text-pink-400 text-xs font-bold">+25 XP</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ==================== WORLD MAP PAGE ==================== -->
+<div id="page-world" class="page pt-20">
+  <section class="max-w-6xl mx-auto px-4 py-6">
+    <div class="flex items-center justify-between mb-4">
+      <div>
+        <h2 class="font-orbitron text-2xl font-bold text-cyan-400 glow-text-blue">Dunia NeuroWorld</h2>
+        <p class="text-gray-400 text-sm">Gunakan WASD atau tombol panah untuk berjalan. Klik area untuk teleport.</p>
+      </div>
+      <div class="glass px-3 py-1 flex items-center gap-2">
+        <i data-lucide="coins" class="w-4 h-4 text-yellow-400"></i>
+        <span class="font-bold text-yellow-400" id="coins-display">0</span>
+      </div>
+    </div>
+    <div class="glass p-4 relative">
+      <canvas id="world-map-canvas" width="900" height="500" class="w-full" style="max-height: 500px;"></canvas>
+      <!-- Area labels overlay -->
+      <div class="absolute top-8 left-8 glass px-3 py-1 text-xs text-cyan-400 font-bold">🗺️ Gunakan WASD untuk bergerak</div>
+    </div>
+    <!-- Quest Log -->
+    <div class="mt-4 glass p-4">
+      <h3 class="font-bold text-purple-400 mb-2 flex items-center gap-2"><i data-lucide="scroll" class="w-4 h-4"></i> Quest Tersedia</h3>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-3" id="quest-log">
+        <div class="bg-white/5 rounded-xl p-3 border border-cyan-500/20 card-hover cursor-pointer" onclick="navigateTo('english')">
+          <div class="text-cyan-400 font-bold text-sm">🎓 Kota Belajar</div>
+          <div class="text-gray-400 text-xs mt-1">Pelajari kata bahasa Inggris baru</div>
+          <div class="text-yellow-400 text-xs mt-1">Reward: +30 XP 🪙 10</div>
+        </div>
+        <div class="bg-white/5 rounded-xl p-3 border border-purple-500/20 card-hover cursor-pointer" onclick="navigateTo('signlanguage')">
+          <div class="text-purple-400 font-bold text-sm">✋ Zona Isyarat</div>
+          <div class="text-gray-400 text-xs mt-1">Belajar bahasa isyarat</div>
+          <div class="text-yellow-400 text-xs mt-1">Reward: +25 XP 🪙 8</div>
+        </div>
+        <div class="bg-white/5 rounded-xl p-3 border border-pink-500/20 card-hover cursor-pointer" onclick="navigateTo('story')">
+          <div class="text-pink-400 font-bold text-sm">🌸 Taman Emosi</div>
+          <div class="text-gray-400 text-xs mt-1">Baca cerita tentang persahabatan</div>
+          <div class="text-yellow-400 text-xs mt-1">Reward: +25 XP 🪙 8</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ==================== ENGLISH LEARNING PAGE ==================== -->
+<div id="page-english" class="page pt-20">
+  <section class="max-w-3xl mx-auto px-4 py-6">
+    <div class="flex items-center justify-between mb-6">
+      <div>
+        <h2 class="font-orbitron text-2xl font-bold text-cyan-400 glow-text-blue">Belajar Bahasa Inggris</h2>
+        <p class="text-gray-400 text-sm">Pelajari kata baru dan kumpulkan XP!</p>
+      </div>
+      <div class="flex items-center gap-3">
+        <div class="glass px-3 py-1 flex items-center gap-1">
+          <i data-lucide="flame" class="w-4 h-4 text-orange-400"></i>
+          <span class="font-bold text-orange-400 text-sm" id="eng-streak">0</span>
+        </div>
+        <div class="glass px-3 py-1 flex items-center gap-1">
+          <i data-lucide="star" class="w-4 h-4 text-yellow-400"></i>
+          <span class="font-bold text-yellow-400 text-sm" id="eng-xp">0</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Lesson Selection -->
+    <div id="eng-lesson-select" class="space-y-3">
+      <div class="glass p-4 card-hover cursor-pointer" onclick="startEnglishLesson(0)">
+        <div class="flex items-center gap-4">
+          <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-2xl">🍎</div>
+          <div class="flex-1">
+            <div class="font-bold text-white">Buah-Buahan</div>
+            <div class="text-gray-400 text-sm">Pelajari nama buah dalam bahasa Inggris</div>
+            <div class="progress-bar mt-2 w-48"><div class="progress-fill" id="eng-progress-0" style="width: 0%"></div></div>
+          </div>
+          <i data-lucide="chevron-right" class="w-5 h-5 text-gray-500"></i>
+        </div>
+      </div>
+      <div class="glass p-4 card-hover cursor-pointer" onclick="startEnglishLesson(1)">
+        <div class="flex items-center gap-4">
+          <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center text-2xl">🐾</div>
+          <div class="flex-1">
+            <div class="font-bold text-white">Hewan</div>
+            <div class="text-gray-400 text-sm">Pelajari nama hewan dalam bahasa Inggris</div>
+            <div class="progress-bar mt-2 w-48"><div class="progress-fill" id="eng-progress-1" style="width: 0%"></div></div>
+          </div>
+          <i data-lucide="chevron-right" class="w-5 h-5 text-gray-500"></i>
+        </div>
+      </div>
+      <div class="glass p-4 card-hover cursor-pointer" onclick="startEnglishLesson(2)">
+        <div class="flex items-center gap-4">
+          <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center text-2xl">🎨</div>
+          <div class="flex-1">
+            <div class="font-bold text-white">Warna</div>
+            <div class="text-gray-400 text-sm">Pelajari nama warna dalam bahasa Inggris</div>
+            <div class="progress-bar mt-2 w-48"><div class="progress-fill" id="eng-progress-2" style="width: 0%"></div></div>
+          </div>
+          <i data-lucide="chevron-right" class="w-5 h-5 text-gray-500"></i>
+        </div>
+      </div>
+      <div class="glass p-4 card-hover cursor-pointer" onclick="startEnglishLesson(3)">
+        <div class="flex items-center gap-4">
+          <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-yellow-500 to-orange-600 flex items-center justify-center text-2xl">👨‍👩‍👧‍👦</div>
+          <div class="flex-1">
+            <div class="font-bold text-white">Keluarga</div>
+            <div class="text-gray-400 text-sm">Pelajari kata keluarga dalam bahasa Inggris</div>
+            <div class="progress-bar mt-2 w-48"><div class="progress-fill" id="eng-progress-3" style="width: 0%"></div></div>
+          </div>
+          <i data-lucide="chevron-right" class="w-5 h-5 text-gray-500"></i>
+        </div>
+      </div>
+    </div>
+
+    <!-- Active Lesson -->
+    <div id="eng-active-lesson" class="hidden">
+      <div class="glass p-6 mb-4">
+        <div class="flex justify-between items-center mb-4">
+          <span class="text-sm text-gray-400" id="eng-lesson-title">Buah-Buahan</span>
+          <span class="text-sm text-cyan-400 font-bold" id="eng-question-num">1/5</span>
+        </div>
+        <div class="progress-bar mb-6"><div class="progress-fill" id="eng-lesson-progress" style="width: 0%"></div></div>
+
+        <!-- Question Display -->
+        <div id="eng-question-area" class="text-center mb-6">
+          <div class="text-6xl mb-4" id="eng-question-emoji">🍎</div>
+          <h3 class="text-2xl font-bold text-white mb-2" id="eng-question-text">Apa bahasa Inggrisnya "Apel"?</h3>
+          <p class="text-gray-400 text-sm" id="eng-question-hint">Pilih jawaban yang benar!</p>
+        </div>
+
+        <!-- Answer Options -->
+        <div class="grid grid-cols-2 gap-3" id="eng-options">
+        </div>
+      </div>
+      <button class="btn-neon w-full" onclick="checkEnglishAnswer()" id="eng-check-btn" disabled>Cek Jawaban</button>
+      <button class="btn-neon cyan w-full hidden mt-2" onclick="nextEnglishQuestion()" id="eng-next-btn">Lanjut →</button>
+    </div>
+
+    <!-- Lesson Complete -->
+    <div id="eng-lesson-complete" class="hidden text-center">
+      <div class="glass p-8">
+        <div class="text-6xl mb-4">🎉</div>
+        <h3 class="font-orbitron text-2xl font-bold text-cyan-400 mb-2">Luar Biasa!</h3>
+        <p class="text-gray-300 mb-4">Kamu telah menyelesaikan pelajaran ini!</p>
+        <div class="flex justify-center gap-4 mb-6">
+          <div class="glass px-4 py-2"><i data-lucide="star" class="w-5 h-5 text-yellow-400 inline"></i> <span class="font-bold text-yellow-400" id="eng-reward-xp">+0</span> XP</div>
+          <div class="glass px-4 py-2"><i data-lucide="coins" class="w-5 h-5 text-yellow-400 inline"></i> <span class="font-bold text-yellow-400" id="eng-reward-coins">+0</span></div>
+        </div>
+        <button class="btn-neon" onclick="showLessonSelect()">Pelajaran Lainnya</button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ==================== SIGN LANGUAGE PAGE ==================== -->
+<div id="page-signlanguage" class="page pt-20">
+  <section class="max-w-3xl mx-auto px-4 py-6">
+    <h2 class="font-orbitron text-2xl font-bold text-purple-400 glow-text-purple mb-2">Belajar Bahasa Isyarat</h2>
+    <p class="text-gray-400 text-sm mb-6">Pelajari alfabet bahasa isyarat Indonesia dengan kartu interaktif!</p>
+
+    <div class="flex gap-3 mb-6">
+      <button class="btn-neon purple sm active-tab" onclick="setSignTab('alphabet')" data-tab="alphabet">Alfabet</button>
+      <button class="btn-neon sm" onclick="setSignTab('quiz')" data-tab="quiz">Kuis Isyarat</button>
+    </div>
+
+    <!-- Alphabet Cards -->
+    <div id="sign-alphabet" class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-3">
+    </div>
+
+    <!-- Sign Quiz -->
+    <div id="sign-quiz" class="hidden">
+      <div class="glass p-6 text-center">
+        <h3 class="font-bold text-lg mb-4 text-purple-400">Tebak Huruf Isyarat Ini!</h3>
+        <div class="hand-display mx-auto mb-6 bg-gradient-to-br from-purple-500/20 to-pink-500/20 border-2 border-purple-500/30" id="sign-quiz-display">A</div>
+        <div class="grid grid-cols-3 gap-3" id="sign-quiz-options"></div>
+        <div class="mt-4 text-sm text-gray-400" id="sign-quiz-feedback"></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ==================== STORY MODE PAGE ==================== -->
+<div id="page-story" class="page pt-20">
+  <section class="max-w-3xl mx-auto px-4 py-6">
+    <h2 class="font-orbitron text-2xl font-bold text-pink-400 mb-2">Dunia Cerita</h2>
+    <p class="text-gray-400 text-sm mb-6">Cerita interaktif yang menyentuh hati 💖</p>
+
+    <!-- Story Selection -->
+    <div id="story-select" class="space-y-3">
+      <div class="glass p-4 card-hover cursor-pointer" onclick="startStory(0)">
+        <div class="flex items-center gap-4">
+          <div class="w-16 h-16 rounded-xl overflow-hidden flex-shrink-0" style="background: linear-gradient(135deg, #f472b6, #a855f7);"></div>
+          <div class="flex-1">
+            <div class="font-bold text-pink-400">Bintang yang Tidak Bersuara</div>
+            <div class="text-gray-400 text-sm mt-1">Kisah tentang Rara, gadis kecil yang menemukan kekuatan dalam diam...</div>
+            <div class="flex items-center gap-2 mt-2">
+              <span class="text-xs bg-pink-500/20 text-pink-400 px-2 py-0.5 rounded">Persahabatan</span>
+              <span class="text-xs bg-purple-500/20 text-purple-400 px-2 py-0.5 rounded">Percaya Diri</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="glass p-4 card-hover cursor-pointer" onclick="startStory(1)">
+        <div class="flex items-center gap-4">
+          <div class="w-16 h-16 rounded-xl overflow-hidden flex-shrink-0" style="background: linear-gradient(135deg, #06ffd0, #00d4ff);"></div>
+          <div class="flex-1">
+            <div class="font-bold text-cyan-400">Teman di Balik Kaca</div>
+            <div class="text-gray-400 text-sm mt-1">Adi dan Lila belajar bahwa perbedaan justru membuat persahabatan mereka istimewa...</div>
+            <div class="flex items-center gap-2 mt-2">
+              <span class="text-xs bg-cyan-500/20 text-cyan-400 px-2 py-0.5 rounded">Inklusi</span>
+              <span class="text-xs bg-green-500/20 text-green-400 px-2 py-0.5 rounded">Perjuangan</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="glass p-4 card-hover cursor-pointer" onclick="startStory(2)">
+        <div class="flex items-center gap-4">
+          <div class="w-16 h-16 rounded-xl overflow-hidden flex-shrink-0" style="background: linear-gradient(135deg, #fbbf24, #f59e0b);"></div>
+          <div class="flex-1">
+            <div class="font-bold text-yellow-400">Melody Tanpa Suara</div>
+            <div class="text-gray-400 text-sm mt-1">Bagaimana Nara menemukan cara bermain musik tanpa mendengar...</div>
+            <div class="flex items-center gap-2 mt-2">
+              <span class="text-xs bg-yellow-500/20 text-yellow-400 px-2 py-0.5 rounded">Kreativitas</span>
+              <span class="text-xs bg-orange-500/20 text-orange-400 px-2 py-0.5 rounded">Inspirasi</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Active Story -->
+    <div id="story-active" class="hidden">
+      <div class="glass p-6">
+        <div class="story-scene mb-4 flex items-center justify-center" id="story-scene" style="min-height: 200px;">
+          <span class="text-8xl" id="story-emoji">🌟</span>
+        </div>
+        <div class="mb-4">
+          <h3 class="font-bold text-lg mb-2" id="story-title"></h3>
+          <p class="text-gray-300 leading-relaxed" id="story-text"></p>
+        </div>
+        <div id="story-choices" class="space-y-2"></div>
+        <div class="flex justify-between mt-4">
+          <button class="btn-neon sm" onclick="prevStoryNode()" id="story-prev-btn">← Kembali</button>
+          <span class="text-sm text-gray-500" id="story-page-num">Halaman 1</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ==================== MINI GAMES PAGE ==================== -->
+<div id="page-minigames" class="page pt-20">
+  <section class="max-w-4xl mx-auto px-4 py-6">
+    <h2 class="font-orbitron text-2xl font-bold text-green-400 mb-2">Mini Games Edukasi</h2>
+    <p class="text-gray-400 text-sm mb-6">Belajar sambil bermain! 🎮</p>
+
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-3 mb-6" id="game-select">
+      <div class="glass p-4 text-center card-hover cursor-pointer" onclick="startMiniGame('memory')">
+        <div class="text-3xl mb-2">🃏</div>
+        <div class="font-bold text-cyan-400 text-sm">Memory Card</div>
+        <div class="text-gray-400 text-xs mt-1">Latih ingatanmu</div>
+      </div>
+      <div class="glass p-4 text-center card-hover cursor-pointer" onclick="startMiniGame('emoji')">
+        <div class="text-3xl mb-2">😊</div>
+        <div class="font-bold text-yellow-400 text-sm">Tebak Emoji</div>
+        <div class="text-gray-400 text-xs mt-1">Tebak kata dari emoji</div>
+      </div>
+      <div class="glass p-4 text-center card-hover cursor-pointer" onclick="startMiniGame('typing')">
+        <div class="text-3xl mb-2">⌨️</div>
+        <div class="font-bold text-purple-400 text-sm">Ketik Cepat</div>
+        <div class="text-gray-400 text-xs mt-1">Latih mengetikmu</div>
+      </div>
+      <div class="glass p-4 text-center card-hover cursor-pointer" onclick="startMiniGame('math')">
+        <div class="text-3xl mb-2">🧮</div>
+        <div class="font-bold text-pink-400 text-sm">Matematika</div>
+        <div class="text-gray-400 text-xs mt-1">Hitung dengan cepat</div>
+      </div>
+      <div class="glass p-4 text-center card-hover cursor-pointer" onclick="startMiniGame('word')">
+        <div class="text-3xl mb-2">📝</div>
+        <div class="font-bold text-green-400 text-sm">Susun Kata</div>
+        <div class="text-gray-400 text-xs mt-1">Susun huruf jadi kata</div>
+      </div>
+      <div class="glass p-4 text-center card-hover cursor-pointer" onclick="startMiniGame('color')">
+        <div class="text-3xl mb-2">🎨</div>
+        <div class="font-bold text-orange-400 text-sm">Tebak Warna</div>
+        <div class="text-gray-400 text-xs mt-1">Tebak warna dalam bahasa Inggris</div>
+      </div>
+    </div>
+
+    <!-- Game Area -->
+    <div id="game-area" class="hidden">
+      <div class="glass p-6">
+        <div class="flex justify-between items-center mb-4">
+          <h3 class="font-bold text-lg" id="game-title">Memory Card</h3>
+          <div class="flex items-center gap-3">
+            <span class="text-sm text-gray-400" id="game-score-label">Skor: <span class="text-cyan-400 font-bold" id="game-score">0</span></span>
+            <button class="btn-neon sm" onclick="closeMiniGame()">✕ Tutup</button>
+          </div>
+        </div>
+        <div id="game-content"></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ==================== AI CHAT PAGE ==================== -->
+<div id="page-ai" class="page pt-20">
+  <section class="max-w-3xl mx-auto px-4 py-6">
+    <div class="flex items-center gap-3 mb-4">
+      <div class="w-10 h-10 rounded-full bg-gradient-to-br from-cyan-500 to-purple-500 flex items-center justify-center text-lg">🤖</div>
+      <div>
+        <h2 class="font-orbitron text-xl font-bold text-cyan-400">Neuro AI</h2>
+        <p class="text-gray-400 text-xs">Asisten pintar yang siap membantumu!</p>
+      </div>
+    </div>
+
+    <div class="glass p-4 mb-4" style="min-height: 400px; max-height: 500px; overflow-y: auto;" id="chat-messages">
+      <div class="chat-bubble ai mb-3">
+        <p>Halo! 👋 Aku <strong>Neuro</strong>, asisten belajarmu!</p>
+        <p class="mt-1">Aku bisa membantu kamu belajar, memberi motivasi, atau mengobrol. Coba tanya sesuatu! ✨</p>
+      </div>
+    </div>
+
+    <div class="flex gap-2">
+      <input type="text" id="chat-input" class="flex-1 glass px-4 py-3 bg-transparent border-gray-600 text-white outline-none focus:border-cyan-500 transition-colors rounded-xl" placeholder="Ketik pesan..." onkeypress="if(event.key==='Enter')sendChat()">
+      <button class="btn-neon" onclick="sendChat()">
+        <i data-lucide="send" class="w-5 h-5"></i>
+      </button>
+    </div>
+
+    <!-- Quick Prompts -->
+    <div class="flex flex-wrap gap-2 mt-3">
+      <button class="btn-neon sm" onclick="quickChat('Aku butuh motivasi')">💪 Motivasi</button>
+      <button class="btn-neon sm purple" onclick="quickChat('Jelaskan tentang bahasa Inggris')">📖 Belajar</button>
+      <button class="btn-neon sm cyan" onclick="quickChat('Berikan aku kuis')">🧠 Kuis</button>
+      <button class="btn-neon sm mint" onclick="quickChat('Ceritakan fakta menarik')">🌟 Fakta</button>
+    </div>
+  </section>
+</div>
+
+<!-- ==================== DASHBOARD PAGE ==================== -->
+<div id="page-dashboard" class="page pt-20">
+  <section class="max-w-4xl mx-auto px-4 py-6">
+    <h2 class="font-orbitron text-2xl font-bold text-purple-400 glow-text-purple mb-6">Analisis Kemampuan</h2>
+
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
+      <div class="glass p-4 text-center card-hover">
+        <div class="text-3xl mb-2">🧠</div>
+        <div class="font-bold text-cyan-400 text-xl" id="dash-logic">72%</div>
+        <div class="text-gray-400 text-xs">Logika</div>
+        <div class="progress-bar mt-2"><div class="progress-fill" style="width: 72%"></div></div>
+      </div>
+      <div class="glass p-4 text-center card-hover">
+        <div class="text-3xl mb-2">🎯</div>
+        <div class="font-bold text-purple-400 text-xl" id="dash-focus">85%</div>
+        <div class="text-gray-400 text-xs">Fokus</div>
+        <div class="progress-bar mt-2"><div class="progress-fill" style="width: 85%; background: linear-gradient(90deg, #a855f7, #ec4899);"></div></div>
+      </div>
+      <div class="glass p-4 text-center card-hover">
+        <div class="text-3xl mb-2">🔥</div>
+        <div class="font-bold text-orange-400 text-xl" id="dash-consistency">60%</div>
+        <div class="text-gray-400 text-xs">Konsistensi</div>
+        <div class="progress-bar mt-2"><div class="progress-fill" style="width: 60%; background: linear-gradient(90deg, #f59e0b, #ef4444);"></div></div>
+      </div>
+      <div class="glass p-4 text-center card-hover">
+        <div class="text-3xl mb-2">🎨</div>
+        <div class="font-bold text-green-400 text-xl" id="dash-creativity">78%</div>
+        <div class="text-gray-400 text-xs">Kreativitas</div>
+        <div class="progress-bar mt-2"><div class="progress-fill" style="width: 78%; background: linear-gradient(90deg, #4ade80, #06ffd0);"></div></div>
+      </div>
+    </div>
+
+    <!-- Learning Style -->
+    <div class="glass p-6 mb-6">
+      <h3 class="font-bold text-lg text-cyan-400 mb-3 flex items-center gap-2"><i data-lucide="sparkles" class="w-5 h-5"></i> Perkiraan Gaya Belajar</h3>
+      <div class="flex flex-wrap gap-3">
+        <div class="bg-cyan-500/10 border border-cyan-500/20 rounded-xl px-4 py-2 text-cyan-400 font-bold text-sm">👁️ Visual Learner</div>
+        <div class="bg-purple-500/10 border border-purple-500/20 rounded-xl px-4 py-2 text-purple-400 font-bold text-sm">🤏 Kinestetik</div>
+      </div>
+      <p class="text-gray-400 text-sm mt-3">Kamu cenderung belajar lebih baik melalui gambar, warna, dan aktivitas langsung. Terus gunakan cara belajarmu yang unik! 🌟</p>
+    </div>
+
+    <!-- Weekly Activity -->
+    <div class="glass p-6 mb-6">
+      <h3 class="font-bold text-lg text-purple-400 mb-3 flex items-center gap-2"><i data-lucide="calendar" class="w-5 h-5"></i> Aktivitas Mingguan</h3>
+      <div class="flex items-end justify-between gap-2" style="height: 120px;">
+        <div class="flex-1 flex flex-col items-center">
+          <div class="w-full bg-gradient-to-t from-cyan-500 to-purple-500 rounded-t-md transition-all" id="bar-sen" style="height: 40%"></div>
+          <span class="text-xs text-gray-400 mt-1">Sen</span>
+        </div>
+        <div class="flex-1 flex flex-col items-center">
+          <div class="w-full bg-gradient-to-t from-cyan-500 to-purple-500 rounded-t-md transition-all" id="bar-sel" style="height: 70%"></div>
+          <span class="text-xs text-gray-400 mt-1">Sel</span>
+        </div>
+        <div class="flex-1 flex flex-col items-center">
+          <div class="w-full bg-gradient-to-t from-cyan-500 to-purple-500 rounded-t-md transition-all" id="bar-rab" style="height: 55%"></div>
+          <span class="text-xs text-gray-400 mt-1">Rab</span>
+        </div>
+        <div class="flex-1 flex flex-col items-center">
+          <div class="w-full bg-gradient-to-t from-cyan-500 to-purple-500 rounded-t-md transition-all" id="bar-kam" style="height: 80%"></div>
+          <span class="text-xs text-gray-400 mt-1">Kam</span>
+        </div>
+        <div class="flex-1 flex flex-col items-center">
+          <div class="w-full bg-gradient-to-t from-cyan-500 to-purple-500 rounded-t-md transition-all" id="bar-jum" style="height: 45%"></div>
+          <span class="text-xs text-gray-400 mt-1">Jum</span>
+        </div>
+        <div class="flex-1 flex flex-col items-center">
+          <div class="w-full bg-gradient-to-t from-green-500 to-cyan-500 rounded-t-md transition-all" id="bar-sab" style="height: 90%"></div>
+          <span class="text-xs text-gray-400 mt-1">Sab</span>
+        </div>
+        <div class="flex-1 flex flex-col items-center">
+          <div class="w-full bg-gradient-to-t from-pink-500 to-yellow-500 rounded-t-md transition-all" id="bar-min" style="height: 30%"></div>
+          <span class="text-xs text-gray-400 mt-1">Min</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Achievements -->
+    <div class="glass p-6">
+      <h3 class="font-bold text-lg text-yellow-400 mb-3 flex items-center gap-2"><i data-lucide="award" class="w-5 h-5"></i> Pencapaian</h3>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+        <div class="bg-yellow-500/10 border border-yellow-500/20 rounded-xl p-3 text-center">
+          <div class="text-2xl mb-1">🌟</div>
+          <div class="text-xs text-yellow-400 font-bold">Langkah Pertama</div>
+          <div class="text-xs text-gray-500">Selesaikan pelajaran pertama</div>
+        </div>
+        <div class="bg-white/5 border border-white/10 rounded-xl p-3 text-center opacity-50">
+          <div class="text-2xl mb-1">🔥</div>
+          <div class="text-xs text-gray-400 font-bold">Api Berkobar</div>
+          <div class="text-xs text-gray-500">3 hari streak</div>
+        </div>
+        <div class="bg-white/5 border border-white/10 rounded-xl p-3 text-center opacity-50">
+          <div class="text-2xl mb-1">🧩</div>
+          <div class="text-xs text-gray-400 font-bold">Master Puzzle</div>
+          <div class="text-xs text-gray-500">Mainkan 5 mini game</div>
+        </div>
+        <div class="bg-white/5 border border-white/10 rounded-xl p-3 text-center opacity-50">
+          <div class="text-2xl mb-1">📖</div>
+          <div class="text-xs text-gray-400 font-bold">Pencerita</div>
+          <div class="text-xs text-gray-500">Baca semua cerita</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ==================== PROFILE PAGE ==================== -->
+<div id="page-profile" class="page pt-20">
+  <section class="max-w-3xl mx-auto px-4 py-6">
+    <div class="glass p-8 text-center mb-6">
+      <div class="w-24 h-24 rounded-full bg-gradient-to-br from-cyan-500 via-purple-500 to-pink-500 mx-auto flex items-center justify-center text-4xl mb-4 float">🧑‍🚀</div>
+      <h2 class="font-orbitron text-xl font-bold text-white mb-1">Penjelajah NeuroWorld</h2>
+      <div class="text-cyan-400 font-bold" id="profile-level">Level 1</div>
+
+      <div class="mt-4 max-w-xs mx-auto">
+        <div class="flex justify-between text-sm mb-1">
+          <span class="text-gray-400">XP Menuju Level Selanjutnya</span>
+          <span class="text-cyan-400 font-bold" id="profile-xp-text">0/100</span>
+        </div>
+        <div class="progress-bar"><div class="progress-fill" id="profile-xp-bar" style="width: 0%"></div></div>
+      </div>
+
+      <div class="grid grid-cols-3 gap-4 mt-6">
+        <div class="glass p-3">
+          <div class="text-2xl font-bold text-yellow-400" id="profile-total-xp">0</div>
+          <div class="text-xs text-gray-400">Total XP</div>
+        </div>
+        <div class="glass p-3">
+          <div class="text-2xl font-bold text-orange-400" id="profile-streak">0</div>
+          <div class="text-xs text-gray-400">Streak</div>
+        </div>
+        <div class="glass p-3">
+          <div class="text-2xl font-bold text-green-400" id="profile-games">0</div>
+          <div class="text-xs text-gray-400">Game Dimainkan</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Skins -->
+    <div class="glass p-6">
+      <h3 class="font-bold text-lg text-purple-400 mb-4 flex items-center gap-2"><i data-lucide="palette" class="w-5 h-5"></i> Skin Karakter</h3>
+      <div class="grid grid-cols-4 md:grid-cols-6 gap-3">
+        <div class="aspect-square rounded-xl bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-2xl cursor-pointer card-hover border-2 border-cyan-400" onclick="changeSkin('🧑‍🚀')">🧑‍🚀</div>
+        <div class="aspect-square rounded-xl bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center text-2xl cursor-pointer card-hover border-2 border-transparent hover:border-purple-400" onclick="changeSkin('🦊')">🦊</div>
+        <div class="aspect-square rounded-xl bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center text-2xl cursor-pointer card-hover border-2 border-transparent hover:border-green-400" onclick="changeSkin('🐸')">🐸</div>
+        <div class="aspect-square rounded-xl bg-gradient-to-br from-yellow-500 to-orange-600 flex items-center justify-center text-2xl cursor-pointer card-hover border-2 border-transparent hover:border-yellow-400" onclick="changeSkin('🦁')">🦁</div>
+        <div class="aspect-square rounded-xl bg-gradient-to-br from-pink-500 to-rose-600 flex items-center justify-center text-2xl cursor-pointer card-hover border-2 border-transparent hover:border-pink-400" onclick="changeSkin('🐰')">🐰</div>
+        <div class="aspect-square rounded-xl bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center text-2xl cursor-pointer card-hover border-2 border-transparent hover:border-indigo-400" onclick="changeSkin('🦄')">🦄</div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+// ==================== APP STATE ====================
+const state = {
+  currentPage: 'home',
+  xp: 0,
+  level: 1,
+  coins: 0,
+  streak: 0,
+  gamesPlayed: 0,
+  lessonsCompleted: 0,
+  skin: '🧑‍🚀',
+  musicPlaying: false,
+  darkMode: true,
+  quests: [false, false, false],
+  engProgress: [0, 0, 0, 0],
+  signLearned: [],
+  storiesRead: [],
+  currentEngLesson: -1,
+  currentEngQuestion: 0,
+  selectedAnswer: -1,
+  currentStory: -1,
+  currentStoryNode: 0,
+  storyHistory: [],
+};
+
+// ==================== SAVE/LOAD ====================
+function saveState() {
+  try { localStorage.setItem('neuroworld_state', JSON.stringify(state)); } catch(e) {}
+}
+function loadState() {
+  try {
+    const saved = JSON.parse(localStorage.getItem('neuroworld_state'));
+    if (saved) Object.assign(state, saved);
+  } catch(e) {}
+}
+
+// ==================== NAVIGATION ====================
+function navigateTo(page) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + page).classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(n => {
+    n.classList.remove('active');
+    n.classList.remove('text-cyan-400');
+    n.classList.add('text-gray-400');
+  });
+  const navItem = document.querySelector(`.nav-item[data-page="${page}"]`);
+  if (navItem) {
+    navItem.classList.add('active', 'text-cyan-400');
+    navItem.classList.remove('text-gray-400');
+  }
+  state.currentPage = page;
+  window.scrollTo(0, 0);
+
+  if (page === 'world') initWorldMap();
+  if (page === 'signlanguage') initSignLanguage();
+  if (page === 'english') updateEnglishUI();
+
+  saveState();
+}
+
+// ==================== XP & LEVEL SYSTEM ====================
+function addXP(amount) {
+  state.xp += amount;
+  const xpNeeded = state.level * 100;
+  while (state.xp >= xpNeeded) {
+    state.xp -= xpNeeded;
+    state.level++;
+    showToast(`🎉 Level Up! Sekarang Level ${state.level}!`, 'purple');
+  }
+  updateUI();
+  saveState();
+}
+
+function addCoins(amount) {
+  state.coins += amount;
+  updateUI();
+  saveState();
+}
+
+function updateUI() {
+  const xpNeeded = state.level * 100;
+  const xpPercent = (state.xp / xpNeeded) * 100;
+
+  document.getElementById('top-xp-bar').style.width = xpPercent + '%';
+  document.getElementById('total-xp').textContent = state.xp;
+  document.getElementById('level-display').textContent = 'Level ' + state.level;
+  document.getElementById('level-badge').textContent = state.level;
+  document.getElementById('streak-count').textContent = state.streak;
+  document.getElementById('coins-display').textContent = state.coins;
+
+  document.getElementById('profile-level').textContent = 'Level ' + state.level;
+  document.getElementById('profile-xp-text').textContent = state.xp + '/' + xpNeeded;
+  document.getElementById('profile-xp-bar').style.width = xpPercent + '%';
+  document.getElementById('profile-total-xp').textContent = state.xp;
+  document.getElementById('profile-streak').textContent = state.streak;
+  document.getElementById('profile-games').textContent = state.gamesPlayed;
+}
+
+function showToast(message, color = 'cyan') {
+  const colors = {
+    cyan: 'bg-cyan-500/20 border border-cyan-500/30 text-cyan-400',
+    purple: 'bg-purple-500/20 border border-purple-500/30 text-purple-400',
+    green: 'bg-green-500/20 border border-green-500/30 text-green-400',
+    yellow: 'bg-yellow-500/20 border border-yellow-500/30 text-yellow-400',
+  };
+  const toast = document.createElement('div');
+  toast.className = `toast ${colors[color] || colors.cyan}`;
+  toast.textContent = message;
+  document.getElementById('toast-container').appendChild(toast);
+  setTimeout(() => toast.remove(), 3000);
+}
+
+// ==================== QUEST SYSTEM ====================
+document.addEventListener('click', (e) => {
+  if (e.target.classList.contains('quest-check')) {
+    const idx = parseInt(e.target.dataset.quest);
+    if (!state.quests[idx]) {
+      state.quests[idx] = true;
+      e.target.innerHTML = '✓';
+      e.target.style.background = 'var(--neon-cyan)';
+      e.target.style.borderColor = 'var(--neon-cyan)';
+      e.target.style.color = '#0a0e1a';
+      addXP([20, 15, 25][idx]);
+      showToast('✅ Misi selesai! +' + [20, 15, 25][idx] + ' XP', 'green');
+    }
+  }
+});
+
+// ==================== BACKGROUND CANVAS ====================
+function initBackground() {
+  const canvas = document.getElementById('bg-canvas');
+  const ctx = canvas.getContext('2d');
+  let particles = [];
+  const resize = () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; };
+  resize();
+  window.addEventListener('resize', resize);
+
+  for (let i = 0; i < 60; i++) {
+    particles.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      vx: (Math.random() - 0.5) * 0.3,
+      vy: (Math.random() - 0.5) * 0.3,
+      size: Math.random() * 2 + 0.5,
+      color: ['rgba(0,212,255,', 'rgba(168,85,247,', 'rgba(6,255,208,', 'rgba(74,222,128,'][Math.floor(Math.random()*4)]
+    });
+  }
+
+  function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach(p => {
+      p.x += p.vx;
+      p.y += p.vy;
+      if (p.x < 0) p.x = canvas.width;
+      if (p.x > canvas.width) p.x = 0;
+      if (p.y < 0) p.y = canvas.height;
+      if (p.y > canvas.height) p.y = 0;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+      ctx.fillStyle = p.color + '0.4)';
+      ctx.fill();
+    });
+    // Draw connections
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const dist = Math.sqrt(dx*dx + dy*dy);
+        if (dist < 150) {
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.strokeStyle = `rgba(0,212,255,${0.05 * (1 - dist/150)})`;
+          ctx.lineWidth = 0.5;
+          ctx.stroke();
+        }
+      }
+    }
+    requestAnimationFrame(animate);
+  }
+  animate();
+}
+
+// ==================== MUSIC SYSTEM (Web Audio API) ====================
+let audioCtx, musicGain, musicOscs = [];
+
+function initMusic() {
+  audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  musicGain = audioCtx.createGain();
+  musicGain.gain.value = 0;
+  musicGain.connect(audioCtx.destination);
+
+  // Create ambient pad
+  const notes = [261.63, 329.63, 392.00, 523.25]; // C4, E4, G4, C5
+  notes.forEach((freq, i) => {
+    const osc = audioCtx.createOscillator();
+    const oscGain = audioCtx.createGain();
+    osc.type = 'sine';
+    osc.frequency.value = freq;
+    oscGain.gain.value = 0.04;
+    osc.connect(oscGain);
+    oscGain.connect(musicGain);
+    osc.start();
+    musicOscs.push({ osc, gain: oscGain });
+
+    // Slow LFO for pad movement
+    const lfo = audioCtx.createOscillator();
+    const lfoGain = audioCtx.createGain();
+    lfo.frequency.value = 0.1 + i * 0.05;
+    lfoGain.gain.value = 3;
+    lfo.connect(lfoGain);
+    lfoGain.connect(osc.frequency);
+    lfo.start();
+  });
+}
+
+function toggleMusic() {
+  if (!audioCtx) initMusic();
+  if (state.musicPlaying) {
+    musicGain.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 0.5);
+    state.musicPlaying = false;
+    document.getElementById('music-icon').setAttribute('data-lucide', 'volume-x');
+  } else {
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+    musicGain.gain.linearRampToValueAtTime(1, audioCtx.currentTime + 0.5);
+    state.musicPlaying = true;
+    document.getElementById('music-icon').setAttribute('data-lucide', 'volume-2');
+  }
+  lucide.createIcons();
+  saveState();
+}
+
+function toggleTheme() {
+  state.darkMode = !state.darkMode;
+  document.body.style.background = state.darkMode ? '#0a0e1a' : '#f0f4ff';
+  document.body.style.color = state.darkMode ? '#e2e8f0' : '#1a1a2e';
+  document.getElementById('theme-icon').setAttribute('data-lucide', state.darkMode ? 'moon' : 'sun');
+  lucide.createIcons();
+  saveState();
+}
+
+// ==================== ENGLISH LEARNING ====================
+const englishLessons = [
+  {
+    title: 'Buah-Buahan',
+    words: [
+      { emoji: '🍎', id: 'Apel', en: 'Apple' },
+      { emoji: '🍌', id: 'Pisang', en: 'Banana' },
+      { emoji: '🍊', id: 'Jeruk', en: 'Orange' },
+      { emoji: '🍇', id: 'Anggur', en: 'Grape' },
+      { emoji: '🍓', id: 'Stroberi', en: 'Strawberry' },
+    ]
+  },
+  {
+    title: 'Hewan',
+    words: [
+      { emoji: '🐱', id: 'Kucing', en: 'Cat' },
+      { emoji: '🐶', id: 'Anjing', en: 'Dog' },
+      { emoji: '🐟', id: 'Ikan', en: 'Fish' },
+      { emoji: '🐦', id: 'Burung', en: 'Bird' },
+      { emoji: '🐰', id: 'Kelinci', en: 'Rabbit' },
+    ]
+  },
+  {
+    title: 'Warna',
+    words: [
+      { emoji: '🔴', id: 'Merah', en: 'Red' },
+      { emoji: '🔵', id: 'Biru', en: 'Blue' },
+      { emoji: '🟢', id: 'Hijau', en: 'Green' },
+      { emoji: '🟡', id: 'Kuning', en: 'Yellow' },
+      { emoji: '🟣', id: 'Ungu', en: 'Purple' },
+    ]
+  },
+  {
+    title: 'Keluarga',
+    words: [
+      { emoji: '👩', id: 'Ibu', en: 'Mother' },
+      { emoji: '👨', id: 'Ayah', en: 'Father' },
+      { emoji: '👧', id: 'Saudara Perempuan', en: 'Sister' },
+      { emoji: '👦', id: 'Saudara Laki-laki', en: 'Brother' },
+      { emoji: '👶', id: 'Bayi', en: 'Baby' },
+    ]
+  }
+];
+
+function startEnglishLesson(idx) {
+  state.currentEngLesson = idx;
+  state.currentEngQuestion = 0;
+  state.selectedAnswer = -1;
+  document.getElementById('eng-lesson-select').classList.add('hidden');
+  document.getElementById('eng-active-lesson').classList.remove('hidden');
+  document.getElementById('eng-lesson-complete').classList.add('hidden');
+  document.getElementById('eng-lesson-title').textContent = englishLessons[idx].title;
+  showEnglishQuestion();
+}
+
+function showLessonSelect() {
+  document.getElementById('eng-lesson-select').classList.remove('hidden');
+  document.getElementById('eng-active-lesson').classList.add('hidden');
+  document.getElementById('eng-lesson-complete').classList.add('hidden');
+  updateEnglishUI();
+}
+
+function showEnglishQuestion() {
+  const lesson = englishLessons[state.currentEngLesson];
+  const q = lesson.words[state.currentEngQuestion];
+  document.getElementById('eng-question-num').textContent = `${state.currentEngQuestion + 1}/${lesson.words.length}`;
+  document.getElementById('eng-question-emoji').textContent = q.emoji;
+  document.getElementById('eng-question-text').textContent = `Apa bahasa Inggrisnya "${q.id}"?`;
+  document.getElementById('eng-question-hint').textContent = 'Pilih jawaban yang benar!';
+  document.getElementById('eng-lesson-progress').style.width = ((state.currentEngQuestion) / lesson.words.length * 100) + '%';
+  document.getElementById('eng-check-btn').disabled = true;
+  document.getElementById('eng-check-btn').classList.add('opacity-50');
+  document.getElementById('eng-next-btn').classList.add('hidden');
+  state.selectedAnswer = -1;
+
+  // Generate options
+  const allWords = englishLessons.flatMap(l => l.words);
+  let options = [q.en];
+  while (options.length < 4) {
+    const rw = allWords[Math.floor(Math.random() * allWords.length)].en;
+    if (!options.includes(rw)) options.push(rw);
+  }
+  options.sort(() => Math.random() - 0.5);
+
+  const container = document.getElementById('eng-options');
+  container.innerHTML = '';
+  options.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'glass p-3 text-center font-bold transition-all hover:bg-white/10 cursor-pointer text-sm';
+    btn.textContent = opt;
+    btn.onclick = () => selectEngOption(i, opt, q.en);
+    container.appendChild(btn);
+  });
+}
+
+function selectEngOption(idx, text, correct) {
+  state.selectedAnswer = idx;
+  const correctIdx = text === correct;
+  const btns = document.getElementById('eng-options').children;
+  Array.from(btns).forEach((b, i) => {
+    b.classList.remove('border-cyan-500', 'border-red-500', 'border-green-500');
+    if (i === idx) b.classList.add('border', 'border-cyan-500');
+  });
+  document.getElementById('eng-check-btn').disabled = false;
+  document.getElementById('eng-check-btn').classList.remove('opacity-50');
+  document.getElementById('eng-check-btn').onclick = () => checkEnglishAnswer(text, correct);
+}
+
+function checkEnglishAnswer(selected, correct) {
+  const btns = document.getElementById('eng-options').children;
+  Array.from(btns).forEach(b => {
+    if (b.textContent === correct) {
+      b.classList.add('border', 'border-green-500', 'bg-green-500/20');
+      b.style.color = '#4ade80';
+    }
+  });
+
+  if (selected === correct) {
+    document.getElementById('eng-question-hint').textContent = '🎉 Benar! Hebat sekali!';
+    document.getElementById('eng-question-hint').style.color = '#4ade80';
+    addXP(5);
+  } else {
+    Array.from(btns).forEach(b => {
+      if (b.textContent === selected) {
+        b.classList.add('border', 'border-red-500', 'bg-red-500/20');
+        b.style.color = '#ef4444';
+      }
+    });
+    document.getElementById('eng-question-hint').textContent = `😊 Jawabannya "${correct}". Tetap semangat!`;
+    document.getElementById('eng-question-hint').style.color = '#f59e0b';
+  }
+
+  document.getElementById('eng-check-btn').classList.add('hidden');
+  document.getElementById('eng-next-btn').classList.remove('hidden');
+}
+
+function nextEnglishQuestion() {
+  state.currentEngQuestion++;
+  const lesson = englishLessons[state.currentEngLesson];
+  if (state.currentEngQuestion >= lesson.words.length) {
+    // Lesson complete
+    document.getElementById('eng-active-lesson').classList.add('hidden');
+    document.getElementById('eng-lesson-complete').classList.remove('hidden');
+    const reward = lesson.words.length * 5;
+    document.getElementById('eng-reward-xp').textContent = '+' + reward;
+    document.getElementById('eng-reward-coins').textContent = '+' + (lesson.words.length * 3);
+    addXP(reward);
+    addCoins(lesson.words.length * 3);
+    state.engProgress[state.currentEngLesson] = 100;
+    state.lessonsCompleted++;
+    state.streak = Math.max(state.streak, 1);
+    saveState();
+    return;
+  }
+  showEnglishQuestion();
+}
+
+function updateEnglishUI() {
+  document.getElementById('eng-streak').textContent = state.streak;
+  document.getElementById('eng-xp').textContent = state.xp;
+  state.engProgress.forEach((p, i) => {
+    const el = document.getElementById('eng-progress-' + i);
+    if (el) el.style.width = p + '%';
+  });
+}
+
+// ==================== SIGN LANGUAGE ====================
+const signAlphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+
+function initSignLanguage() {
+  const container = document.getElementById('sign-alphabet');
+  container.innerHTML = '';
+  signAlphabet.forEach(letter => {
+    const card = document.createElement('div');
+    const isLearned = state.signLearned.includes(letter);
+    card.className = `glass p-3 text-center card-hover cursor-pointer ${isLearned ? 'border border-purple-500/30' : ''}`;
+    card.innerHTML = `
+      <div class="hand-display mx-auto mb-2 bg-gradient-to-br ${isLearned ? 'from-purple-500/30 to-pink-500/30' : 'from-white/5 to-white/10'} border-2 ${isLearned ? 'border-purple-500/50' : 'border-white/10'}">
+        <span class="font-orbitron font-bold text-2xl ${isLearned ? 'text-purple-400' : 'text-gray-400'}">${letter}</span>
+      </div>
+      <div class="text-xs text-gray-400">${isLearned ? '✅ Dipelajari' : 'Tap untuk belajar'}</div>
+    `;
+    card.onclick = () => learnSignLetter(letter);
+    container.appendChild(card);
+  });
+}
+
+function learnSignLetter(letter) {
+  if (!state.signLearned.includes(letter)) {
+    state.signLearned.push(letter);
+    addXP(3);
+    showToast(`✅ Huruf ${letter} dipelajari! +3 XP`, 'purple');
+  }
+  initSignLanguage();
+}
+
+function setSignTab(tab) {
+  document.getElementById('sign-alphabet').classList.toggle('hidden', tab !== 'alphabet');
+  document.getElementById('sign-quiz').classList.toggle('hidden', tab !== 'quiz');
+  if (tab === 'quiz') showSignQuiz();
+}
+
+function showSignQuiz() {
+  const letter = signAlphabet[Math.floor(Math.random() * signAlphabet.length)];
+  document.getElementById('sign-quiz-display').textContent = letter;
+  document.getElementById('sign-quiz-feedback').textContent = '';
+
+  let options = [letter];
+  while (options.length < 4) {
+    const r = signAlphabet[Math.floor(Math.random() * 26)];
+    if (!options.includes(r)) options.push(r);
+  }
+  options.sort(() => Math.random() - 0.5);
+
+  const container = document.getElementById('sign-quiz-options');
+  container.innerHTML = '';
+  options.forEach(opt => {
+    const btn = document.createElement('button');
+    btn.className = 'glass p-2 text-center font-bold cursor-pointer hover:bg-white/10 transition-all';
+    btn.textContent = opt;
+    btn.onclick = () => {
+      if (opt === letter) {
+        btn.style.background = 'rgba(74,222,128,0.3)';
+        btn.style.color = '#4ade80';
+        document.getElementById('sign-quiz-feedback').textContent = '🎉 Benar! Hebat!';
+        document.getElementById('sign-quiz-feedback').style.color = '#4ade80';
+        addXP(5);
+        if (!state.signLearned.includes(letter)) {
+          state.signLearned.push(letter);
+        }
+        setTimeout(showSignQuiz, 1200);
+      } else {
+        btn.style.background = 'rgba(239,68,68,0.3)';
+        btn.style.color = '#ef4444';
+        document.getElementById('sign-quiz-feedback').textContent = `Jawabannya ${letter}. Coba lagi!`;
+        document.getElementById('sign-quiz-feedback').style.color = '#f59e0b';
+      }
+    };
+    container.appendChild(btn);
+  });
+}
+
+// ==================== STORY MODE ====================
+const stories = [
+  {
+    title: 'Bintang yang Tidak Bersuara',
+    nodes: [
+      { emoji: '🌟', text: 'Di sebuah kota kecil, hiduplah seorang gadis bernama Rara. Rara tidak bisa mendengar suara dunia, tapi dia bisa melihat keindahan yang tersembunyi di setiap hal.', choices: [{ text: '🌞 Ikuti Rara berjalan ke sekolah', next: 1 }] },
+      { emoji: '🏫', text: 'Di sekolah, anak-anak sering berbisik tentang Rara. "Dia aneh," kata beberapa orang. Tapi Rara tidak peduli. Dia selalu tersenyum dan membantu siapa saja.', choices: [{ text: '😊 Rara bertemu teman baru', next: 2 }, { text: '😢 Rara duduk sendirian', next: 3 }] },
+      { emoji: '👋', text: '"Hai! Aku Lila!" seorang gadis kecil mendatangi Rara. Lila mengangkat tangannya dan membentuk huruf isyarat sederhana. Rara terkejut — ada yang berusaha berkomunikasi dengannya!', choices: [{ text: '🤝 Mereka mulai berteman', next: 4 }, { text: '🤔 Rara ragu', next: 5 }] },
+      { emoji: '😢', text: 'Rara duduk sendirian di bangku taman. Dia melihat kupu-kupu terbang, awan bergerak, dan dedaunan bergoyang. "Dunia ini indah," bisik hatinya, "meskipun aku tidak bisa mendengarnya."', choices: [{ text: '🦋 Kupu-kupu menuntun Rara', next: 4 }] },
+      { emoji: '🌈', text: 'Lila belajar bahasa isyarat hanya untuk bisa mengobrol dengan Rara. Setiap hari mereka bermain bersama. Rara mengajarkan Lila melihat dunia dengan cara baru — melalui getaran, warna, dan gerakan.', choices: [{ text: '⭐ Rara menemukan bakat baru', next: 6 }] },
+      { emoji: '💭', text: '"Mungkin aku tidak perlu mendengar untuk dipahami," pikir Rara. Dia mengambil napas dalam dan memutuskan untuk mencoba berbicara dengan cara barunya — melalui senyum dan isyarat.', choices: [{ text: '🌈 Rara mencoba membuka diri', next: 4 }] },
+      { emoji: '✨', text: 'Rara menemukan bahwa dia bisa melukis dengan luar biasa! Setiap lukisannya menceritakan cerita yang tidak bisa diucapkan kata-kata. Lila dan seluruh kota akhirnya mengerti — Rara tidak "tidak bisa mendengar", dia "mendengar dengan hati".\n\n🌟 PESAN: Setiap orang punya cara berbicara yang unik. Yang penting adalah kita saling mendengarkan dengan hati. 🌟', choices: [{ text: '🏠 Kembali ke menu cerita', next: -1 }] },
+    ]
+  },
+  {
+    title: 'Teman di Balik Kaca',
+    nodes: [
+      { emoji: '🏠', text: 'Adi adalah anak yang pemalu. Dia selalu melihat dunia dari balik jendela kamarnya. Suatu hari, seorang anak baru pindah ke rumah sebelah.', choices: [{ text: '👀 Adi mengintip dari jendela', next: 1 }] },
+      { emoji: '👧', text: 'Anak itu bernama Lila. Dia menggunakan alat bantu dengar. Adi penasaran tapi takut untuk menyapa. "Bagaimana kalau dia tidak mengerti aku?" pikir Adi.', choices: [{ text: '👋 Adi memberanikan diri', next: 2 }, { text: '🙈 Adi bersembunyi', next: 3 }] },
+      { emoji: '🌸', text: 'Adi melambaikan tangan. Lila tersenyum lebar dan melambaikan balik! Mereka mulai berkomunikasi dengan gambar, isyarat, dan banyak tawa. Perbedaan justru membuat persahabatan mereka istimewa.', choices: [{ text: '🎨 Mereka menggambar bersama', next: 4 }] },
+      { emoji: '😔', text: 'Adi bersembunyi di kamarnya. Tapi Lila tidak menyerah. Dia menggambar gambar kecil dan menempelkannya di jendela Adi — seekor burung yang terbang bebas, dengan tulisan "Teman?"', choices: [{ text: '💕 Adi akhirnya membuka jendela', next: 2 }] },
+      { emoji: '🎭', text: 'Mereka membuat pertunjukan boneka tanpa suara — murni gerak dan ekspresi! Seluruh kampung terpaku melihatnya. "Kalian tidak perlu suara untuk bercerita," kata guru mereka.', choices: [{ text: '🌟 Penutup', next: 5 }] },
+      { emoji: '✨', text: 'Adi dan Lila membuktikan bahwa persahabatan tidak butuh kata-kata. Yang dibutuhkan hanyalah hati yang terbuka dan keberanian untuk saling memahami.\n\n🌟 PESAN: Perbedaan bukan penghalang, tapi jembatan menuju persahabatan yang lebih dalam. 🌟', choices: [{ text: '🏠 Kembali ke menu cerita', next: -1 }] },
+    ]
+  },
+  {
+    title: 'Melody Tanpa Suara',
+    nodes: [
+      { emoji: '🎵', text: 'Nara mencintai musik sejak kecil. Meskipun dia tidak bisa mendengar, dia bisa MERASAKAN setiap nada melalui getaran. Suatu hari, sekolah mengadakan audisi paduan suara.', choices: [{ text: '🎤 Nara ingin ikut audisi', next: 1 }] },
+      { emoji: '😤', text: '"Kamu tidak bisa menyanyi jika tidak bisa mendengar," kata beberapa teman. Nara hampir menyerah. Tapi ibunya berkata, "Kamu mendengar dengan cara yang berbeda, bukan cara yang salah."', choices: [{ text: '💪 Nara tidak menyerah', next: 2 }, { text: '😢 Nara merasa sedih', next: 3 }] },
+      { emoji: '🥁', text: 'Nara meminta gurunya mengizinkannya bermain drum — dia bisa merasakan setiap ketukan! Dan saat dia bermain, semua orang terkesima. Ritmenya sempurna, karena dia mendengar dengan seluruh tubuhnya.', choices: [{ text: '🌟 Penampilan besar', next: 4 }] },
+      { emoji: '💧', text: 'Nara menangis sendirian. Tapi kemudian dia menyadari — tangisnya punya ritme. Detak jantungnya adalah musik. Langkah kakinya adalah melodi. "Aku tidak butuh telinga untuk bermusik," bisiknya.', choices: [{ text: '💪 Nara bangkit', next: 2 }] },
+      { emoji: '✨', text: 'Di pentas akhir tahun, Nara bermain drum dengan penampilan yang mengagumkan. Seluruh sekolah berdiri dan bertepuk tangan. Nara tidak mendengar tepuk tangan itu — tapi dia MERASAKANNYA melalui lantai, melalui udara, melalui senyum setiap wajah.\n\n🌟 PESAN: Musik hidup di dalam setiap diri. Kamu tidak perlu mendengar suara untuk menjadi bagian dari melodi dunia. 🌟', choices: [{ text: '🏠 Kembali ke menu cerita', next: -1 }] },
+    ]
+  }
+];
+
+function startStory(idx) {
+  state.currentStory = idx;
+  state.currentStoryNode = 0;
+  state.storyHistory = [0];
+  document.getElementById('story-select').classList.add('hidden');
+  document.getElementById('story-active').classList.remove('hidden');
+  showStoryNode(0);
+}
+
+function showStoryNode(nodeIdx) {
+  const story = stories[state.currentStory];
+  const node = story.nodes[nodeIdx];
+  state.currentStoryNode = nodeIdx;
+
+  document.getElementById('story-title').textContent = story.title;
+  document.getElementById('story-emoji').textContent = node.emoji;
+  document.getElementById('story-text').textContent = node.text;
+  document.getElementById('story-page-num').textContent = `Halaman ${state.storyHistory.length}`;
+
+  const sceneColors = {
+    '🌟': 'from-indigo-900/50 to-purple-900/50',
+    '🏫': 'from-blue-900/50 to-cyan-900/50',
+    '👋': 'from-green-900/50 to-emerald-900/50',
+    '😢': 'from-gray-900/50 to-blue-900/50',
+    '🌈': 'from-purple-900/50 to-pink-900/50',
+    '💭': 'from-cyan-900/50 to-blue-900/50',
+    '✨': 'from-yellow-900/50 to-orange-900/50',
+    '🏠': 'from-slate-900/50 to-gray-900/50',
+    '👧': 'from-pink-900/50 to-purple-900/50',
+    '🌸': 'from-rose-900/50 to-pink-900/50',
+    '😔': 'from-gray-900/50 to-slate-900/50',
+    '🎭': 'from-purple-900/50 to-indigo-900/50',
+    '🎵': 'from-blue-900/50 to-indigo-900/50',
+    '🎤': 'from-purple-900/50 to-cyan-900/50',
+    '😤': 'from-red-900/50 to-orange-900/50',
+    '💪': 'from-orange-900/50 to-yellow-900/50',
+    '💧': 'from-blue-900/50 to-cyan-900/50',
+    '🥁': 'from-amber-900/50 to-red-900/50',
+    '🙈': 'from-gray-900/50 to-pink-900/50',
+    '💕': 'from-pink-900/50 to-red-900/50',
+  };
+  const bg = sceneColors[node.emoji] || 'from-purple-900/50 to-blue-900/50';
+  document.getElementById('story-scene').style.background = `linear-gradient(135deg, ${bg.replace('from-', '').replace(' to-', ', ')})`;
+
+  const choicesDiv = document.getElementById('story-choices');
+  choicesDiv.innerHTML = '';
+  node.choices.forEach(c => {
+    const btn = document.createElement('button');
+    btn.className = 'btn-neon w-full text-left text-sm';
+    if (c.next === -1) {
+      btn.textContent = c.text;
+      btn.onclick = () => {
+        document.getElementById('story-select').classList.remove('hidden');
+        document.getElementById('story-active').classList.add('hidden');
+        addXP(25);
+        state.streak = Math.max(state.streak, 1);
+        saveState();
+      };
+    } else {
+      btn.textContent = c.text;
+      btn.onclick = () => {
+        state.storyHistory.push(c.next);
+        showStoryNode(c.next);
+      };
+    }
+    choicesDiv.appendChild(btn);
+  });
+
+  document.getElementById('story-prev-btn').style.display = state.storyHistory.length > 1 ? '' : 'none';
+}
+
+function prevStoryNode() {
+  if (state.storyHistory.length > 1) {
+    state.storyHistory.pop();
+    showStoryNode(state.storyHistory[state.storyHistory.length - 1]);
+  }
+}
+
+// ==================== MINI GAMES ====================
+let currentGame = null;
+let gameScore = 0;
+
+function startMiniGame(type) {
+  document.getElementById('game-select').classList.add('hidden');
+  document.getElementById('game-area').classList.remove('hidden');
+  currentGame = type;
+  gameScore = 0;
+  document.getElementById('game-score').textContent = '0';
+
+  switch(type) {
+    case 'memory': initMemoryGame(); break;
+    case 'emoji': initEmojiGame(); break;
+    case 'typing': initTypingGame(); break;
+    case 'math': initMathGame(); break;
+    case 'word': initWordGame(); break;
+    case 'color': initColorGame(); break;
+  }
+}
+
+function closeMiniGame() {
+  document.getElementById('game-select').classList.remove('hidden');
+  document.getElementById('game-area').classList.add('hidden');
+  addXP(Math.floor(gameScore * 0.5));
+  addCoins(Math.floor(gameScore * 0.3));
+  state.gamesPlayed++;
+  saveState();
+}
+
+// Memory Card Game
+function initMemoryGame() {
+  document.getElementById('game-title').textContent = '🃏 Memory Card';
+  const emojis = ['🌟', '🧠', '🎮', '🎵', '🌈', '💫', '🦋', '🔮'];
+  const pairs = [...emojis, ...emojis].sort(() => Math.random() - 0.5);
+  let flipped = [];
+  let matched = 0;
+  let busy = false;
+
+  const container = document.getElementById('game-content');
+  container.innerHTML = '<div class="grid grid-cols-4 gap-2 max-w-xs mx-auto">' +
+    pairs.map((emoji, i) => `<div class="memory-card mx-auto" data-idx="${i}">
+      <div class="memory-card-inner">
+        <div class="memory-card-front"><span class="text-gray-500">?</span></div>
+        <div class="memory-card-back">${emoji}</div>
+      </div>
+    </div>`).join('') + '</div>';
+
+  container.querySelectorAll('.memory-card').forEach(card => {
+    card.onclick = () => {
+      if (busy || card.classList.contains('flipped')) return;
+      card.classList.add('flipped');
+      flipped.push(card);
+      if (flipped.length === 2) {
+        busy = true;
+        const [a, b] = flipped;
+        if (a.querySelector('.memory-card-back').textContent === b.querySelector('.memory-card-back').textContent) {
+          matched++;
+          gameScore += 10;
+          document.getElementById('game-score').textContent = gameScore;
+          flipped = [];
+          busy = false;
+          if (matched === emojis.length) {
+            setTimeout(() => showToast('🎉 Semua pasangan ditemukan! +XP', 'green'), 500);
+          }
+        } else {
+          setTimeout(() => {
+            a.classList.remove('flipped');
+            b.classList.remove('flipped');
+            flipped = [];
+            busy = false;
+          }, 800);
+        }
+      }
+    };
+  });
+}
+
+// Emoji Guess Game
+const emojiPuzzles = [
+  { emojis: '🌧️ + 🌈', answer: 'PELANGI', hint: 'Muncul setelah hujan' },
+  { emojis: '🌙 + 😴', answer: 'MIMPI', hint: 'Saat tidur' },
+  { emojis: '📚 + 🧠', answer: 'BELAJAR', hint: 'Kegiatan di sekolah' },
+  { emojis: '❤️ + 👫', answer: 'PERSAHABATAN', hint: 'Hubungan antar teman' },
+  { emojis: '🎵 + 🎤', answer: 'MENYANYI', hint: 'Bernyanyi' },
+  { emojis: '☀️ + 🌊', answer: 'PANTAI', hint: 'Tempat liburan' },
+  { emojis: '🏠 + 👨‍👩‍👧‍👦', answer: 'KELUARGA', hint: 'Orang-orang tercinta' },
+  { emojis: '✋ + 🗣️', answer: 'ISYARAT', hint: 'Berbicara dengan tangan' },
+];
+
+function initEmojiGame() {
+  document.getElementById('game-title').textContent = '😊 Tebak Emoji';
+  let puzzleIdx = 0;
+  const container = document.getElementById('game-content');
+
+  function showPuzzle() {
+    const puzzle = emojiPuzzles[puzzleIdx % emojiPuzzles.length];
+    container.innerHTML = `
+      <div class="text-center">
+        <div class="text-5xl mb-4">${puzzle.emojis}</div>
+        <p class="text-gray-400 text-sm mb-4">Hint: ${puzzle.hint}</p>
+        <div class="flex flex-wrap justify-center gap-2 mb-4" id="emoji-letter-bank"></div>
+        <div class="flex flex-wrap justify-center gap-1 mb-4 min-h-[40px]" id="emoji-answer-slots"></div>
+        <button class="btn-neon sm" onclick="this.parentElement.querySelector('.emoji-hint').classList.toggle('hidden')">💡 Hint</button>
+        <p class="emoji-hint hidden text-sm text-yellow-400 mt-2">${puzzle.answer}</p>
+      </div>
+    `;
+
+    const bank = document.getElementById('emoji-letter-bank');
+    const slots = document.getElementById('emoji-answer-slots');
+    const letters = puzzle.answer.split('');
+    const shuffled = [...letters, ...Array(4).fill(0).map(() => 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'[Math.floor(Math.random()*26)])].sort(() => Math.random() - 0.5);
+
+    shuffled.forEach((letter, i) => {
+      const btn = document.createElement('button');
+      btn.className = 'glass w-10 h-10 text-center font-bold text-sm cursor-pointer hover:bg-white/10 transition-all';
+      btn.textContent = letter;
+      btn.onclick = () => {
+        if (btn.classList.contains('used')) return;
+        btn.classList.add('used', 'opacity-30');
+        const slot = document.createElement('span');
+        slot.className = 'glass w-10 h-10 flex items-center justify-center font-bold text-cyan-400 text-sm';
+        slot.textContent = letter;
+        slot.dataset.letter = letter;
+        slot.onclick = () => {
+          slot.remove();
+          btn.classList.remove('used', 'opacity-30');
+        };
+        slots.appendChild(slot);
+
+        // Check answer
+        const currentAnswer = Array.from(slots.children).map(s => s.dataset.letter).join('');
+        if (currentAnswer === puzzle.answer) {
+          gameScore += 20;
+          document.getElementById('game-score').textContent = gameScore;
+          showToast('🎉 Benar! +20 poin', 'green');
+          puzzleIdx++;
+          setTimeout(showPuzzle, 1000);
+        }
+      };
+      bank.appendChild(btn);
+    });
+  }
+  showPuzzle();
+}
+
+// Typing Game
+function initTypingGame() {
+  document.getElementById('game-title').textContent = '⌨️ Ketik Cepat';
+  const words = ['NEURO', 'BELAJAR', 'DUNIA', 'CERITA', 'GAME', 'ISYARAT', 'BAHASA', 'ANAK', 'HEBAT', 'BINTANG', 'CAHAYA', 'SEMANGAT'];
+  let timeLeft = 30;
+  let currentWord = '';
+
+  const container = document.getElementById('game-content');
+  container.innerHTML = `
+    <div class="text-center">
+      <div class="text-3xl font-orbitron font-bold mb-2 text-cyan-400" id="typing-word">NEURO</div>
+      <p class="text-gray-400 text-sm mb-4">Ketik kata yang muncul secepat mungkin!</p>
+      <div class="text-sm mb-4">Waktu: <span class="text-yellow-400 font-bold" id="typing-time">30</span>d</div>
+      <input type="text" id="typing-input" class="glass w-full max-w-xs mx-auto px-4 py-3 bg-transparent text-center text-white font-bold text-lg outline-none focus:border-cyan-500 border border-gray-600 rounded-xl" placeholder="Ketik di sini..." autofocus>
+    </div>
+  `;
+
+  const input = document.getElementById('typing-input');
+  const wordEl = document.getElementById('typing-word');
+  const timeEl = document.getElementById('typing-time');
+
+  function newWord() {
+    currentWord = words[Math.floor(Math.random() * words.length)];
+    wordEl.textContent = currentWord;
+    input.value = '';
+  }
+  newWord();
+
+  input.oninput = () => {
+    if (input.value.toUpperCase() === currentWord) {
+      gameScore += 10;
+      document.getElementById('game-score').textContent = gameScore;
+      newWord();
+    }
+  };
+
+  const timer = setInterval(() => {
+    timeLeft--;
+    timeEl.textContent = timeLeft;
+    if (timeLeft <= 0) {
+      clearInterval(timer);
+      showToast(`⏰ Waktu habis! Skor: ${gameScore}`, 'yellow');
+    }
+  }, 1000);
+}
+
+// Math Game
+function initMathGame() {
+  document.getElementById('game-title').textContent = '🧮 Matematika';
+  const container = document.getElementById('game-content');
+
+  function newProblem() {
+    const a = Math.floor(Math.random() * 15) + 1;
+    const b = Math.floor(Math.random() * 15) + 1;
+    const ops = ['+', '-', '×'];
+    const op = ops[Math.floor(Math.random() * 3)];
+    let answer;
+    if (op === '+') answer = a + b;
+    else if (op === '-') answer = Math.max(a, b) - Math.min(a, b);
+    else answer = a * b;
+
+    const options = [answer];
+    while (options.length < 4) {
+      const r = answer + Math.floor(Math.random() * 11) - 5;
+      if (r !== answer && r >= 0 && !options.includes(r)) options.push(r);
+    }
+    options.sort(() => Math.random() - 0.5);
+
+    container.innerHTML = `
+      <div class="text-center">
+        <div class="text-4xl font-orbitron font-bold mb-6 text-purple-400">${Math.max(a,b)} ${op} ${Math.min(a,b)} = ?</div>
+        <div class="grid grid-cols-2 gap-3 max-w-xs mx-auto">
+          ${options.map(o => `<button class="glass p-4 text-xl font-bold cursor-pointer hover:bg-white/10 transition-all" onclick="checkMathAnswer(${o}, ${answer})">${o}</button>`).join('')}
+        </div>
+      </div>
+    `;
+  }
+
+  window.checkMathAnswer = (selected, correct) => {
+    if (selected === correct) {
+      gameScore += 15;
+      document.getElementById('game-score').textContent = gameScore;
+      showToast('✅ Benar! +15', 'green');
+      setTimeout(newProblem, 600);
+    } else {
+      showToast('❌ Coba lagi!', 'yellow');
+    }
+  };
+
+  newProblem();
+}
+
+// Word Game (Scramble)
+function initWordGame() {
+  document.getElementById('game-title').textContent = '📝 Susun Kata';
+  const words = ['NEURO', 'BELAJAR', 'DUNIA', 'CERITA', 'HEBAT', 'BINTANG', 'SEMANGAT', 'ISYARAT'];
+  let currentWord = '';
+
+  const container = document.getElementById('game-content');
+
+  function newWord() {
+    currentWord = words[Math.floor(Math.random() * words.length)];
+    const shuffled = currentWord.split('').sort(() => Math.random() - 0.5);
+    const slots = [];
+
+    container.innerHTML = `
+      <div class="text-center">
+        <p class="text-gray-400 text-sm mb-4">Susun huruf menjadi kata yang benar!</p>
+        <div class="flex flex-wrap justify-center gap-2 mb-4" id="word-slots"></div>
+        <div class="flex flex-wrap justify-center gap-2 mb-4" id="word-bank"></div>
+      </div>
+    `;
+
+    const bank = document.getElementById('word-bank');
+    const slotsEl = document.getElementById('word-slots');
+
+    shuffled.forEach((letter, i) => {
+      const btn = document.createElement('button');
+      btn.className = 'glass w-12 h-12 text-center font-bold text-lg cursor-pointer hover:bg-white/10 transition-all text-cyan-400';
+      btn.textContent = letter;
+      btn.onclick = () => {
+        if (btn.classList.contains('used')) return;
+        btn.classList.add('used', 'opacity-30');
+        const slot = document.createElement('span');
+        slot.className = 'glass w-12 h-12 flex items-center justify-center font-bold text-lg text-purple-400';
+        slot.textContent = letter;
+        slot.onclick = () => {
+          slot.remove();
+          btn.classList.remove('used', 'opacity-30');
+        };
+        slotsEl.appendChild(slot);
+
+        const current = Array.from(slotsEl.children).map(s => s.textContent).join('');
+        if (current === currentWord) {
+          gameScore += 20;
+          document.getElementById('game-score').textContent = gameScore;
+          showToast('🎉 Benar! +20', 'green');
+          setTimeout(newWord, 1000);
+        }
+      };
+      bank.appendChild(btn);
+    });
+  }
+  newWord();
+}
+
+// Color Game
+function initColorGame() {
+  document.getElementById('game-title').textContent = '🎨 Tebak Warna';
+  const colorWords = [
+    { en: 'Red', id: 'Merah', color: '#ef4444' },
+    { en: 'Blue', id: 'Biru', color: '#3b82f6' },
+    { en: 'Green', id: 'Hijau', color: '#22c55e' },
+    { en: 'Yellow', id: 'Kuning', color: '#eab308' },
+    { en: 'Purple', id: 'Ungu', color: '#a855f7' },
+    { en: 'Orange', id: 'Oranye', color: '#f97316' },
+    { en: 'Pink', id: 'Merah Muda', color: '#ec4899' },
+    { en: 'Cyan', id: 'Sian', color: '#06b6d4' },
+  ];
+
+  const container = document.getElementById('game-content');
+
+  function newQ() {
+    const correct = colorWords[Math.floor(Math.random() * colorWords.length)];
+    let options = [correct];
+    while (options.length < 4) {
+      const r = colorWords[Math.floor(Math.random() * colorWords.length)];
+      if (!options.includes(r)) options.push(r);
+    }
+    options.sort(() => Math.random() - 0.5);
+
+    container.innerHTML = `
+      <div class="text-center">
+        <div class="w-24 h-24 rounded-2xl mx-auto mb-4" style="background: ${correct.color}; box-shadow: 0 0 30px ${correct.color}50;"></div>
+        <p class="text-gray-400 text-sm mb-4">Warna apakah ini dalam bahasa Inggris?</p>
+        <div class="grid grid-cols-2 gap-3 max-w-xs mx-auto">
+          ${options.map(o => `<button class="glass p-3 font-bold cursor-pointer hover:bg-white/10 transition-all" onclick="checkColorAnswer('${o.en}', '${correct.en}')">${o.en}</button>`).join('')}
+        </div>
+      </div>
+    `;
+  }
+
+  window.checkColorAnswer = (sel, cor) => {
+    if (sel === cor) {
+      gameScore += 15;
+      document.getElementById('game-score').textContent = gameScore;
+      showToast('🎨 Benar! +15', 'green');
+      setTimeout(newQ, 600);
+    } else {
+      showToast('😊 Coba lagi!', 'yellow');
+    }
+  };
+  newQ();
+}
+
+// ==================== AI CHAT ====================
+const aiResponses = {
+  motivasi: [
+    "Kamu luar biasa! 🌟 Setiap langkah kecilmu adalah kemajuan besar. Terus belajar!",
+    "Ingat, superhero terhebat dimulai dari nol. Kamu sedang dalam perjalanan yang amazing! 💪",
+    "Tidak ada yang tidak bisa kamu lakukan. Kamu punya kekuatan yang istimewa! ✨",
+    "Setiap hari adalah kesempatan baru. Kamu sudah hebat hari ini! 🌈",
+    "Kamu adalah bintang yang bersinar sendiri. Jangan pernah berhenti berkembang! ⭐",
+  ],
+  belajar: [
+    "Bahasa Inggris itu seru! Mulai dari kata sederhana seperti 'Hello' (Halo), 'Thank you' (Terima kasih), dan 'Friend' (Teman). 📚",
+    "Tips belajar: Coba tulis 3 kata baru setiap hari dan gunakan dalam kalimat. Konsistensi adalah kunci! 🔑",
+    "Bahasa isyarat adalah bahasa visual yang indah! Mulai dari alfabet A-Z, lalu pelajari kata-kata sederhana. ✋",
+    "Kamu tahu tidak? Otak kita lebih mudah mengingat gambar daripada kata. Itu sebabnya belajar visual cocok untukmu! 🧠",
+  ],
+  kuis: [
+    "🎯 Kuis Waktu! Apa bahasa Inggrisnya 'Kucing'? a) Dog b) Cat c) Fish d) Bird\nJawaban: b) Cat! Kamu pasti tahu kan? 😊",
+    "🧠 Tebak-tebak! Berapa 7 × 8? Jawabannya 56! Kamu bisa hitung lebih cepat? 💪",
+    "✋ Kuis Isyarat: Huruf 'C' dalam bahasa isyarat dibentuk dengan tangan seperti membentuk huruf C. Coba buat! 🤟",
+  ],
+  fakta: [
+    "🌟 Fakta Menarik: Lumba-lumba menggunakan bahasa isyarat untuk berkomunikasi! Mereka sangat pintar, seperti kamu!",
+    "🧠 Tahukah kamu? Otak manusia bisa menyimpan sekitar 2,5 juta gigabyte informasi. Kamu punya potensi luar biasa!",
+    "🌍 Fakta: Ada lebih dari 300 bahasa isyarat di seluruh dunia! Setiap satu unik dan indah.",
+    "🎵 Fakta Seru: Beethoven, komposer musik terkenal, menulis musik indah meskipun ia tidak bisa mendengar! Kalau dia bisa, kamu juga bisa! 🎹",
+  ],
+  default: [
+    "Aku Neuro, asisten belajarmu! Aku bisa membantu banyak hal. Coba tanya tentang motivasi, belajar, atau fakta menarik! 🤖",
+    "Wah, pertanyaan yang bagus! Aku masih belajar juga nih. Tapi aku selalu siap membantumu belajar! 💡",
+    "Hmm, aku belum terlalu paham itu, tapi aku tahu banyak tentang belajar bahasa Inggris, bahasa isyarat, dan motivasi! Coba tanya hal lain? 😊",
+    "Aku selalu di sini untukmu! Kamu bisa bertanya apa saja tentang belajar, atau sekadar mengobrol. Aku siap! 🌟",
+  ]
+};
+
+function sendChat() {
+  const input = document.getElementById('chat-input');
+  const msg = input.value.trim();
+  if (!msg) return;
+  input.value = '';
+
+  const messages = document.getElementById('chat-messages');
+  messages.innerHTML += `<div class="chat-bubble user mb-3">${msg}</div>`;
+
+  // Determine response
+  let category = 'default';
+  const lower = msg.toLowerCase();
+  if (lower.includes('motivasi') || lower.includes('semangat') || lower.includes('sedih') || lower.includes('putus asa')) category = 'motivasi';
+  else if (lower.includes('belajar') || lower.includes('bahasa') || lower.includes('inggris') || lower.includes('isyarat') || lower.includes('ajar')) category = 'belajar';
+  else if (lower.includes('kuis') || lower.includes('tes') || lower.includes('soal')) category = 'kuis';
+  else if (lower.includes('fakta') || lower.includes('tahukah') || lower.includes('menarik')) category = 'fakta';
+
+  const responses = aiResponses[category];
+  const response = responses[Math.floor(Math.random() * responses.length)];
+
+  setTimeout(() => {
+    messages.innerHTML += `<div class="chat-bubble ai mb-3">${response}</div>`;
+    messages.scrollTop = messages.scrollHeight;
+  }, 500 + Math.random() * 500);
+
+  messages.scrollTop = messages.scrollHeight;
+}
+
+function quickChat(msg) {
+  document.getElementById('chat-input').value = msg;
+  sendChat();
+}
+
+// ==================== WORLD MAP ====================
+let worldMap, worldCtx, player, worldKeys = {};
+const worldAreas = [
+  { name: 'Kota Belajar', x: 150, y: 100, w: 120, h: 80, color: '#00d4ff', emoji: '🎓', page: 'english' },
+  { name: 'Zona Bahasa Inggris', x: 380, y: 80, w: 140, h: 80, color: '#4ade80', emoji: '📚', page: 'english' },
+  { name: 'Taman Emosi', x: 620, y: 100, w: 120, h: 80, color: '#f472b6', emoji: '🌸', page: 'story' },
+  { name: 'Puzzle Center', x: 150, y: 300, w: 120, h: 80, color: '#fbbf24', emoji: '🧩', page: 'minigames' },
+  { name: 'AI Center', x: 400, y: 310, w: 120, h: 80, color: '#a855f7', emoji: '🤖', page: 'ai' },
+  { name: 'Zona Isyarat', x: 640, y: 300, w: 120, h: 80, color: '#06ffd0', emoji: '✋', page: 'signlanguage' },
+];
+const worldNPCs = [
+  { name: 'Guru Sinta', x: 210, y: 200, emoji: '👩‍🏫', msg: 'Selamat datang di Kota Belajar!' },
+  { name: 'Neuro Bot', x: 460, y: 410, emoji: '🤖', msg: 'Aku siap membantumu!' },
+  { name: 'Rara', x: 680, y: 210, emoji: '👧', msg: 'Hai! Ayo baca ceritaku!' },
+];
+
+function initWorldMap() {
+  worldMap = document.getElementById('world-map-canvas');
+  worldCtx = worldMap.getContext('2d');
+  player = { x: 450, y: 250, size: 16, speed: 3 };
+
+  if (!worldMap._init) {
+    worldMap._init = true;
+    document.addEventListener('keydown', e => { worldKeys[e.key] = true; });
+    document.addEventListener('keyup', e => { worldKeys[e.key] = false; });
+    worldMap.addEventListener('click', e => {
+      const rect = worldMap.getBoundingClientRect();
+      const scaleX = worldMap.width / rect.width;
+      const scaleY = worldMap.height / rect.height;
+      const mx = (e.clientX - rect.left) * scaleX;
+      const my = (e.clientY - rect.top) * scaleY;
+      for (const area of worldAreas) {
+        if (mx >= area.x && mx <= area.x + area.w && my >= area.y && my <= area.y + area.h) {
+          navigateTo(area.page);
+          return;
+        }
+      }
+      player.x = mx;
+      player.y = my;
+    });
+  }
+  drawWorldMap();
+}
+
+function drawWorldMap() {
+  if (state.currentPage !== 'world') return;
+  const ctx = worldCtx;
+  const w = worldMap.width;
+  const h = worldMap.height;
+
+  ctx.clearRect(0, 0, w, h);
+
+  // Background
+  const grd = ctx.createLinearGradient(0, 0, w, h);
+  grd.addColorStop(0, '#0f172a');
+  grd.addColorStop(1, '#1e1b4b');
+  ctx.fillStyle = grd;
+  ctx.fillRect(0, 0, w, h);
+
+  // Grid
+  ctx.strokeStyle = 'rgba(0,212,255,0.05)';
+  ctx.lineWidth = 1;
+  for (let i = 0; i < w; i += 40) {
+    ctx.beginPath(); ctx.moveTo(i, 0); ctx.lineTo(i, h); ctx.stroke();
+  }
+  for (let i = 0; i < h; i += 40) {
+    ctx.beginPath(); ctx.moveTo(0, i); ctx.lineTo(w, i); ctx.stroke();
+  }
+
+  // Paths between areas
+  ctx.strokeStyle = 'rgba(0,212,255,0.15)';
+  ctx.lineWidth = 2;
+  ctx.setLineDash([5, 5]);
+  for (let i = 0; i < worldAreas.length - 1; i++) {
+    const a = worldAreas[i];
+    const b = worldAreas[i + 1];
+    ctx.beginPath();
+    ctx.moveTo(a.x + a.w/2, a.y + a.h/2);
+    ctx.lineTo(b.x + b.w/2, b.y + b.h/2);
+    ctx.stroke();
+  }
+  ctx.setLineDash([]);
+
+  // Areas
+  worldAreas.forEach(area => {
+    ctx.fillStyle = area.color + '20';
+    ctx.strokeStyle = area.color + '60';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.roundRect(area.x, area.y, area.w, area.h, 12);
+    ctx.fill();
+    ctx.stroke();
+
+    ctx.font = '24px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText(area.emoji, area.x + area.w/2, area.y + 32);
+    ctx.font = 'bold 10px Nunito, sans-serif';
+    ctx.fillStyle = area.color;
+    ctx.fillText(area.name, area.x + area.w/2, area.y + area.h - 12);
+  });
+
+  // NPCs
+  worldNPCs.forEach(npc => {
+    ctx.font = '20px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText(npc.emoji, npc.x, npc.y);
+    ctx.font = '8px Nunito, sans-serif';
+    ctx.fillStyle = '#94a3b8';
+    ctx.fillText(npc.name, npc.x, npc.y + 12);
+  });
+
+  // Player movement
+  if (worldKeys['ArrowUp'] || worldKeys['w'] || worldKeys['W']) player.y -= player.speed;
+  if (worldKeys['ArrowDown'] || worldKeys['s'] || worldKeys['S']) player.y += player.speed;
+  if (worldKeys['ArrowLeft'] || worldKeys['a'] || worldKeys['A']) player.x -= player.speed;
+  if (worldKeys['ArrowRight'] || worldKeys['d'] || worldKeys['D']) player.x += player.speed;
+  player.x = Math.max(player.size, Math.min(w - player.size, player.x));
+  player.y = Math.max(player.size, Math.min(h - player.size, player.y));
+
+  // Check if player is in an area
+  worldAreas.forEach(area => {
+    if (player.x >= area.x && player.x <= area.x + area.w && player.y >= area.y && player.y <= area.y + area.h) {
+      ctx.fillStyle = area.color + '30';
+      ctx.beginPath();
+      ctx.roundRect(area.x, area.y, area.w, area.h, 12);
+      ctx.fill();
+    }
+  });
+
+  // Player
+  ctx.font = '20px sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText(state.skin, player.x, player.y + 6);
+
+  // Glow around player
+  ctx.beginPath();
+  ctx.arc(player.x, player.y, 20, 0, Math.PI * 2);
+  ctx.fillStyle = 'rgba(0,212,255,0.1)';
+  ctx.fill();
+
+  requestAnimationFrame(drawWorldMap);
+}
+
+// ==================== DASHBOARD UPDATE ====================
+function updateDashboard() {
+  const logic = Math.min(99, 50 + state.lessonsCompleted * 5 + state.gamesPlayed * 2);
+  const focus = Math.min(99, 55 + state.streak * 8 + state.gamesPlayed * 2);
+  const consistency = Math.min(99, 40 + state.streak * 12);
+  const creativity = Math.min(99, 45 + state.gamesPlayed * 4);
+
+  document.getElementById('dash-logic').textContent = logic + '%';
+  document.getElementById('dash-focus').textContent = focus + '%';
+  document.getElementById('dash-consistency').textContent = consistency + '%';
+  document.getElementById('dash-creativity').textContent = creativity + '%';
+}
+
+// ==================== SKIN ====================
+function changeSkin(skin) {
+  state.skin = skin;
+  showToast('🎨 Skin berhasil diganti!', 'cyan');
+  saveState();
+}
+
+// ==================== INIT ====================
+function init() {
+  loadState();
+  initBackground();
+  updateUI();
+  updateDashboard();
+
+  // Loading screen
+  setTimeout(() => {
+    document.getElementById('loading-screen').classList.add('hidden');
+    setTimeout(() => document.getElementById('loading-screen').remove(), 500);
+  }, 1500);
+
+  // Streak check
+  const lastDate = localStorage.getItem('neuroworld_lastDate');
+  const today = new Date().toDateString();
+  if (lastDate !== today) {
+    if (lastDate) {
+      const lastTime = new Date(lastDate).getTime();
+      const now = Date.now();
+      if (now - lastTime > 86400000 * 2) {
+        state.streak = 0; // Reset streak if more than 2 days
+      }
+    }
+    state.streak++;
+    localStorage.setItem('neuroworld_lastDate', today);
+    saveState();
+  }
+
+  lucide.createIcons();
+}
+
+document.addEventListener('DOMContentLoaded', init);
+</script>
+<script src="https://deepsite.hf.co/deepsite-badge.js"></script>
+</body>
+</html>
